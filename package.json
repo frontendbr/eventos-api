@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/angeliski/frontendbr-eventos-api/issues"
   },
-  "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme"
+  "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
+  "devDependencies": {
+    "karma": "^1.7.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4"
+  }
 }
