@@ -16,8 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'src/js/**/*.js',
-      'src/js/**/*.js',
-      'src/js/**/*.js'
+      'test/**/*.spec.js'
     ],
 
 
@@ -52,7 +51,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers
