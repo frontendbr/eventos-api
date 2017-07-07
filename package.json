@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-karma": "0.0.5",
     "karma": "^1.7.0",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4"
