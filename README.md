@@ -1,4 +1,7 @@
 # frontendbr-eventos-api
+
+Develop: [![Build Status](https://travis-ci.org/angeliski/frontendbr-eventos-api.svg?branch=master)](https://travis-ci.org/angeliski/frontendbr-eventos-api)
+
 Esse projeto tem como intuito criar uma API capaz de fornecer os dados para os eventos do [frontendbr](frontendbr.com.br/eventos).
 
 ### Draft
