@@ -1,9 +1,11 @@
 'use strict';
 
+var DB = require('../database');
+
 exports.addEvent = function(args, res, next) {
   /**
    * Add a new event
-   * 
+   *
    *
    * body Body Event object that needs to be added
    * no response value expected for this operation
@@ -14,7 +16,7 @@ exports.addEvent = function(args, res, next) {
 exports.deleteEvent = function(args, res, next) {
   /**
    * Deletes a event
-   * 
+   *
    *
    * eventId Long Event id to delete
    * no response value expected for this operation
@@ -79,7 +81,7 @@ exports.getEventById = function(args, res, next) {
 exports.listEvent = function(args, res, next) {
   /**
    * List all events
-   * 
+   *
    *
    * month Integer The month. (optional)
    * state String The state. (optional)
@@ -89,15 +91,7 @@ exports.listEvent = function(args, res, next) {
    * returns List
    **/
   var examples = {};
-  examples['application/json'] = [ {
-  "date" : "20/02/2017",
-  "price" : "100.00",
-  "id" : 123456789,
-  "shortDescription" : "Evento para frontends discutirem sobre assuntos bacanas",
-  "title" : "Front In Sampa",
-  "local" : "Avenida Paulista, 1000",
-  "eventLink" : "http://link-para-o-evento.com.br"
-} ];
+  examples['application/json'] = DB.listEvent();
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -109,7 +103,7 @@ exports.listEvent = function(args, res, next) {
 exports.updateEventWithForm = function(args, res, next) {
   /**
    * Updates a event in the store with form data
-   * 
+   *
    *
    * eventId Long ID of event that needs to be updated
    * body Body_1 Event object that needs to be added
@@ -121,7 +115,7 @@ exports.updateEventWithForm = function(args, res, next) {
 exports.uploadFile = function(args, res, next) {
   /**
    * uploads an image
-   * 
+   *
    *
    * eventId Long ID of event to update
    * additionalMetadata String Additional data to pass to server (optional)
@@ -141,4 +135,3 @@ exports.uploadFile = function(args, res, next) {
     res.end();
   }
 }
-

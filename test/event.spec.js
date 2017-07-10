@@ -1,27 +1,24 @@
-//During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
 
-//Require the dev-dependencies
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let app = require('../src/js/index');
-let should = chai.should();
-
+const chai = require('chai'),
+			chaiHttp = require('chai-http'),
+			app = require('../src'),
+			should = chai.should(),
+			server = 'http://localhost:8080/eventos/api/v1';
 
 chai.use(chaiHttp);
 
 describe('Events', () => {;
 	describe('/GET event', () => {
 	  it('it should GET all the events', (done) => {
-			chai.request('http://localhost:8080')
-		    .get('/eventos/api/v1/event')
+			chai.request(server)
+		    .get('/event')
 		    .end((err, res) => {
 			  	res.should.have.status(200);
 			  	res.body.should.be.a('array');
-			  	res.body.length.should.be.eql(1);
+			  	res.body.length.should.be.eql(2);
 		      done();
 		    });
 	  });
   });
 });
-  

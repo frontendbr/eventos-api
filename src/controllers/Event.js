@@ -1,7 +1,5 @@
 'use strict';
 
-var url = require('url');
-
 var Event = require('./EventService');
 
 module.exports.addEvent = function addEvent (req, res, next) {
