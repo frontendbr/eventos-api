@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "test": "mocha --timeout 10000",
     "start": "node src/js/index.js",
     "debug": "DEBUG=swagger-tools* node src/js/index.js"
   },
@@ -25,11 +25,8 @@
     "swagger-tools": "0.10.1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-karma": "0.0.5",
-    "jasmine-core": "^2.6.4",
-    "karma": "^1.7.0",
-    "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.4"
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
   }
 }
