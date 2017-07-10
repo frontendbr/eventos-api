@@ -23,7 +23,8 @@
   "dependencies": {
     "config": "^1.26.1",
     "express": "^4.15.3",
-    "morgan": "^1.8.0"
+    "morgan": "^1.8.0",
+    "swagger-ui-express": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
