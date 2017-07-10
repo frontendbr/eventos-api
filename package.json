@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "test": "mocha --timeout 10000",
-    "start": "node src/js/index.js",
-    "debug": "DEBUG=swagger-tools* node src/js/index.js"
+    "test": "mocha --timeout 10000 --reporter nyan",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "start": "node src",
+    "debug": "DEBUG=* node src"
   },
   "repository": {
     "type": "git",
@@ -21,14 +22,15 @@
   "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
   "dependencies": {
     "config": "^1.26.1",
-    "connect": "^3.2.0",
-    "firebase": "^4.1.3",
-    "js-yaml": "^3.3.0",
-    "swagger-tools": "0.10.1"
+    "express": "^4.15.3",
+    "morgan": "^1.8.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
-    "mocha": "^2.4.5"
+    "coveralls": "^2.13.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.3.0"
   }
 }

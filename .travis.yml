@@ -4,3 +4,5 @@ node_js:
 script: mocha --timeout 10000
 before_script:
     - npm install
+after_success:
+  - npm run coveralls

@@ -1,10 +1,3 @@
 {
-  "firebase": {
-    "apiKey": "AIzaSyDClNYE54DCbk5y91sf-_MCYLIfkto6zwk",
-    "authDomain": "frontend-br-eventos.firebaseapp.com",
-    "databaseURL": "https://frontend-br-eventos.firebaseio.com",
-    "projectId": "frontend-br-eventos",
-    "storageBucket": "frontend-br-eventos.appspot.com",
-    "messagingSenderId": "477638030798"
-  }
+  "port": "3000"
 }

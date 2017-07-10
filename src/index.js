@@ -1,40 +1,29 @@
-'use strict';
+const http = require('http');
+const express = require('express');
+const morgan = require('morgan');
+const middleware = require('./middleware');
+const initializeDb = require('./database');
+const api = require('./api');
+const config = require('config');
 
-var app = require('connect')();
-var http = require('http');
-var swaggerTools = require('swagger-tools');
-var jsyaml = require('js-yaml');
-var fs = require('fs');
-var serverPort = 8080;
+let app = express();
+app.server = http.createServer(app);
 
-// swaggerRouter configuration
-var options = {
-  swaggerUi: __dirname + '/swagger.json',
-  controllers: __dirname + '/controllers',
-  useStubs: process.env.NODE_ENV === 'development' ? false : false // Conditionally turn on stubs (mock mode)
-};
+// logger
+app.use(morgan('dev'));
 
-// The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-var spec = fs.readFileSync(__dirname + '/api/swagger.yaml', 'utf8');
-var swaggerDoc = jsyaml.safeLoad(spec);
+// connect to db
+initializeDb( db => {
 
-// Initialize the Swagger middleware
-swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
-  // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
-  app.use(middleware.swaggerMetadata());
+	// internal middleware
+	app.use(middleware({ config, db }));
 
-  // Validate Swagger requests
-  app.use(middleware.swaggerValidator());
+	// api router
+	app.use('/api', api({ config, db }));
 
-  // Route validated requests to appropriate controller
-  app.use(middleware.swaggerRouter(options));
-
-  // Serve the Swagger documents and Swagger UI
-  app.use(middleware.swaggerUi());
-
-  // Start the server
-  http.createServer(app).listen(serverPort, function () {
-    console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
-    console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
-  });
+	app.server.listen(process.env.PORT || config.port, () => {
+		console.log(`Started on port ${app.server.address().port}`);
+	});
 });
+
+module.exports = app;
