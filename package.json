@@ -23,6 +23,7 @@
     "config": "^1.26.1",
     "express": "^4.15.3",
     "morgan": "^1.8.0",
+    "now": "^7.2.4",
     "swagger-ui-express": "^2.0.1"
   },
   "devDependencies": {
