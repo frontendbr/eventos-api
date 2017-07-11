@@ -20,7 +20,7 @@
   },
   "now": {
     "alias": "frontendbr.eventos"
-  }
+  },
   "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
   "dependencies": {
     "config": "^1.26.1",
