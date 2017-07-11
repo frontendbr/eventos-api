@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/angeliski/frontendbr-eventos-api/issues"
   },
+  "now": {
+    "alias": "frontendbr.eventos"
+  }
   "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
   "dependencies": {
     "config": "^1.26.1",
