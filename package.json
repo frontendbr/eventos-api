@@ -19,7 +19,7 @@
     "url": "https://github.com/angeliski/frontendbr-eventos-api/issues"
   },
   "now": {
-    "alias": "frontendbr.eventos"
+    "alias": "frontendbr-eventos"
   },
   "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
   "dependencies": {
