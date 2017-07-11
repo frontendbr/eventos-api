@@ -6,6 +6,5 @@ before_script:
     - npm install
 after_success:
   - npm run coveralls
-  - now -t $TOKEN_NOW --public
-  - now alias
+  - now -t $TOKEN_NOW --public alias
     
