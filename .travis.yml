@@ -7,4 +7,5 @@ before_script:
 after_success:
   - npm run coveralls
   - now -t $TOKEN_NOW --public
+  - now alias
     
