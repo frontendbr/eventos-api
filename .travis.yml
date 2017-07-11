@@ -8,7 +8,7 @@ after_success:
   - npm run coveralls
 deploy:
   provider: script
-  script: now -t $TOKEN_NOW --public alias
+  script:  bash ./deploy.sh
   on:
     branch: master
     
