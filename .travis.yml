@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+    - "6.11.0"
+script: mocha --timeout 10000 --reporter nyan
+before_script:
+    - npm install
+after_success:
+  - npm run coveralls
+deploy:
+  provider: script
+  script: now -t $TOKEN_NOW --public alias
+  on:
+    branch: master
+    
