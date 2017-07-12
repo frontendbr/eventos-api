@@ -7,6 +7,6 @@ Esse projeto tem como intuito criar uma API capaz de fornecer os dados para os e
 
 ### Draft
 O desenho da API está sendo feito no [Swagger](https://swagger.io).
-Para visualizar, você pode acessar a [documentação(https://frontendbr-eventos.now.sh/api/docs/)
+Para visualizar, você pode acessar a [documentação](https://frontendbr-eventos.now.sh/api/docs/)
 
 Com isso é possível visualizar o atual draft, qualquer sugestão pode ser feita pelas issues.

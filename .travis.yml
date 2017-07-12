@@ -6,9 +6,5 @@ before_script:
     - npm install
 after_success:
   - npm run coveralls
-deploy:
-  provider: script
-  script:  bash ./deploy.sh
-  on:
-    branch: master
-    
+  - test $TRAVIS_BRANCH = "master" &&
+    now -t $TOKEN_NOW --public alias
