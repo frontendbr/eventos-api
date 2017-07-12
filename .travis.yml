@@ -6,5 +6,7 @@ before_script:
     - npm install
 after_success:
   - npm run coveralls
-  - test $TRAVIS_BRANCH = "master" &&
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" &&
+    now -t $TOKEN_NOW --public
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" &&
     now -t $TOKEN_NOW --public alias
