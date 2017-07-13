@@ -1,5 +1,9 @@
 {
   "port": "3000",
+  "github" : {
+    "clienteId" :"93c87ec9bfbea4151180",
+    "clienteSecret" :"8e1d50fb000071ebd47a7c970fce9365c831f287"
+  },
   "firebase": {
     "apiKey": "AIzaSyDClNYE54DCbk5y91sf-_MCYLIfkto6zwk",
     "authDomain": "frontend-br-eventos.firebaseapp.com",
