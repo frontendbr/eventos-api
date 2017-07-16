@@ -7,7 +7,7 @@ module.exports = ({ config, db, app }) => {
   console.info('Init Middleware module');
   const routes = Router();
 
-  defaultMiddleware({ app });
+  defaultMiddleware({ config, app });
 
 	routes.use(passportMiddleware({ config, db }));
 

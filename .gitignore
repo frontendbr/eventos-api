@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# firebase
+frontend-br-eventos-firebase-adminsdk-cwau8-feba252aa4.json

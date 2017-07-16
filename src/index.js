@@ -5,6 +5,7 @@ const middleware = require('./middleware');
 const initializeDb = require('./database');
 const api = require('./api');
 const config = require('config');
+const views = require('./views');
 
 const app = express();
 app.server = http.createServer(app);
@@ -15,10 +16,10 @@ app.use(morgan('dev'));
 // connect to db
 initializeDb( db => {
 
-	// internal middleware
 	app.use(middleware({ config, db, app }));
 
-	// api router
+	views({ config, db, app });
+
 	app.use('/api', api({ config, db }));
 
 	app.server.listen(process.env.PORT || config.port, () => {

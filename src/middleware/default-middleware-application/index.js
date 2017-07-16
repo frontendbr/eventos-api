@@ -7,6 +7,6 @@ module.exports = ( { config, db, app } ) => {
 
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
-  app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+  app.use(session({ secret: config.secret, resave: false, saveUninitialized: false }));
 
 }

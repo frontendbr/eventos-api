@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const { Strategy } = require('passport-github2');
 const passport = require('passport');
+const firebase = require('firebase');
+const admin = require('../../admin-firebase')();
 
 module.exports = ({ config, db }) => {
   console.info('Init Middleware Passport module');
@@ -9,6 +11,7 @@ module.exports = ({ config, db }) => {
 
   const GITHUB_CLIENT_ID = config.github.clienteId;
   const GITHUB_CLIENT_SECRET = config.github.clienteSecret;
+  const CALLBACK_URL = config.github.callbackURL;
 
 
   // Passport session setup.
@@ -18,11 +21,13 @@ module.exports = ({ config, db }) => {
   //   the user by ID when deserializing.  However, since this example does not
   //   have a database of user records, the complete GitHub profile is serialized
   //   and deserialized.
-  passport.serializeUser(function(user, done) {
+  passport.serializeUser((user, done) => {
+    //TODO tratar no firebase?
     done(null, user);
   });
 
-  passport.deserializeUser(function(obj, done) {
+  passport.deserializeUser((obj, done) => {
+    //TODO tratar no firebase?
     done(null, obj);
   });
 
@@ -34,18 +39,23 @@ module.exports = ({ config, db }) => {
   passport.use(new Strategy({
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+      callbackURL: CALLBACK_URL
     },
-    function(accessToken, refreshToken, profile, done) {
-      // asynchronous verification, for effect...
-      process.nextTick(function () {
+    (accessToken, refreshToken, profile, done) => {
+      const credential = firebase.auth.GithubAuthProvider.credential(accessToken);
 
+      profile.accessToken = accessToken;
+      profile.credential = credential;
+
+      // asynchronous verification, for effect...
+      process.nextTick(() => {
         // To keep the example simple, the user's GitHub profile is returned to
         // represent the logged-in user.  In a typical application, you would want
         // to associate the GitHub account with a user record in your database,
         // and return that user instead.
         return done(null, profile);
       });
+
     }
   ));
 
@@ -65,8 +75,7 @@ module.exports = ({ config, db }) => {
   //   back to this application at /auth/github/callback
   routes.get('/auth/github',
     passport.authenticate('github', { scope: [ 'user:email' ] }),
-    function(req, res){
-      console.error('Erro');
+    (req, res) => {
       // The request will be redirected to GitHub for authentication, so this
       // function will not be called.
     });
@@ -79,10 +88,28 @@ module.exports = ({ config, db }) => {
   //   which, in this example, will redirect the user to the home page.
   routes.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
-    function(req, res) {
-      console.log(req.user);
-      res.redirect('/api');
+    (req, res) => {
+
+      firebase
+      .auth()
+        .signInWithCredential(req.user.credential).catch((error) => {
+      });
+        res.redirect('/home');
     });
+
+
+    routes.get('/auth',
+      (req, res) => {
+        const accessToken = req.query.accessToken;
+        const credential = firebase.auth.GithubAuthProvider.credential(accessToken);
+
+        firebase
+        .auth()
+          .signInWithCredential(credential).catch((error) => {
+        });
+        
+          res.redirect('/home');
+      });
 
 
     return routes;
