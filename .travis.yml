@@ -1,7 +1,7 @@
 language: node_js
 node_js:
     - "6.11.0"
-script: mocha --timeout 10000 --reporter nyan
+script: mocha --timeout 10000 --recursive --reporter list
 before_script:
     - npm install
 after_success:
