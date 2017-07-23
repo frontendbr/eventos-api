@@ -6,6 +6,8 @@ const initializeDb = require('./database');
 const api = require('./api');
 const config = require('config');
 const views = require('./views');
+const signout = require('./middleware-signout')
+
 
 const app = express();
 app.server = http.createServer(app);
@@ -23,13 +25,7 @@ initializeDb( db => {
 	app.use('/api', api({ config, db }));
 
 	//essa middleware é responsável por deslogar o usuário
-	app.use(( req, res, next ) => {
-		db.signOut().then(function() {
-		  console.log('Signed Out');
-		}, function(error) {
-		  console.error('Sign Out Error', error);
-		});
-	});
+	signout({ app });
 
 	app.server.listen(process.env.PORT || config.port, () => {
 		console.log(`Started on port ${app.server.address().port}`);
