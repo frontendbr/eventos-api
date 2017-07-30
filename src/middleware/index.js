@@ -5,6 +5,7 @@ const passportMiddleware = require('./passport-middleware');
 
 module.exports = ({ config, db, app }) => {
   console.info('Init Middleware module');
+  
   const routes = Router();
 
   defaultMiddleware({ config, app });

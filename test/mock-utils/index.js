@@ -8,14 +8,12 @@ const database = sinon.spy(( callback ) => {
     callback({});
 });
 
-const express = sinon.spy(() => {
-  return {
-    use: () => { },
-    use: () => { },
-    get: () => { }
-  };
-});
+const express = require('./express');
 
+ex = sinon.stub(express, 'Router');
+ex.returns({
+  use: () => {}
+});
 const http = {
   createServer: () => {}
 };
@@ -34,11 +32,10 @@ ht.returns({
 });
 
 const middleware = sinon.spy(()=>{});
-
+const defaultMiddleware = sinon.spy(()=>{});
+const passportMiddleware = sinon.spy(()=>{});
 const signout = sinon.spy(()=>{});
-
 const views = sinon.spy(()=>{});
-
 const api = sinon.spy(()=>{});
 
 const store = {};
@@ -49,14 +46,16 @@ store['./middleware'] = middleware;
 store['./views'] = views;
 store['./api'] = api;
 store['./middleware-signout'] = signout;
+store['./default-middleware-application'] = defaultMiddleware;
+store['./passport-middleware'] = passportMiddleware;
+store['express-router'] = ex;
 
 function init(pathModule, modules){
   const initialize = {};
   for(let i=0; i< modules.length; i++ ){
       initialize[modules[i]] = store[modules[i]];
   }
-
-  proxyquireStrict(pathModule, initialize);
+  return proxyquireStrict(pathModule, initialize);
 }
 
 function getModule(moduleName) {

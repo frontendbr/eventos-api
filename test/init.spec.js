@@ -1,9 +1,10 @@
 process.env.NODE_ENV = 'test';
 
+const sinon = require("sinon");
 const chai = require('chai');
+const sinonChai = require("sinon-chai");
 const should = chai.should();
 const assert = chai.assert;
-const sinon = require('sinon');
 
 const mocks = require('./mock-utils');
 
@@ -18,11 +19,11 @@ describe('App', () => {
 																										'./views',
 																										'./api']);
 
-      sinon.assert.calledOnce(mocks.getModule('./database'));
-			sinon.assert.calledOnce(mocks.getModule('./middleware'));
-			sinon.assert.calledOnce(mocks.getModule('./middleware-signout'));
-			sinon.assert.calledOnce(mocks.getModule('./views'));
-			sinon.assert.calledOnce(mocks.getModule('./api'));
+      mocks.getModule('./database').should.have.been.called;
+			mocks.getModule('./middleware').should.have.been.called;
+			mocks.getModule('./middleware-signout').should.have.been.called;
+			mocks.getModule('./views').should.have.been.called;
+			mocks.getModule('./api').should.have.been.called;
 			assert.isNotNull(app);
 	  });
   });
