@@ -1,12 +1,16 @@
 language: node_js
 node_js:
-    - "6.11.0"
-script: mocha --timeout 10000 --reporter nyan
+- 6.11.0
+script: mocha --timeout 10000 --recursive --reporter list
 before_script:
-    - npm install
+- npm install
 after_success:
-  - npm run coveralls
-  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" &&
-    now -t $TOKEN_NOW --public
-  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" &&
-    now -t $TOKEN_NOW --public alias
+- npm run coveralls
+- test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && now -t
+  $TOKEN_NOW --public
+- test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && now -t
+  $TOKEN_NOW --public alias
+before_install:
+- openssl aes-256-cbc -K $encrypted_ed4734b58a5b_key -iv $encrypted_ed4734b58a5b_iv
+  -in frontend-br-eventos-firebase-adminsdk-cwau8-feba252aa4.json.enc -out src/admin-firebase/frontend-br-eventos-firebase-adminsdk-cwau8-feba252aa4.json
+  -d

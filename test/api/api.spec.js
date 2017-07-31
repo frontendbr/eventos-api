@@ -2,13 +2,13 @@ process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../src');
+const app = require('../../src');
 const should = chai.should();
 
 chai.use(chaiHttp);
 
 describe('API', () => {
-	describe('/GET version', () => {
+	describe('/GET', () => {
 	  it('it should GET the API version', (done) => {
 			chai.request(app)
 		    .get('/api')

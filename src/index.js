@@ -5,8 +5,11 @@ const middleware = require('./middleware');
 const initializeDb = require('./database');
 const api = require('./api');
 const config = require('config');
+const views = require('./views');
+const signout = require('./middleware-signout')
 
-let app = express();
+
+const app = express();
 app.server = http.createServer(app);
 
 // logger
@@ -15,11 +18,14 @@ app.use(morgan('dev'));
 // connect to db
 initializeDb( db => {
 
-	// internal middleware
-	app.use(middleware({ config, db }));
+	app.use(middleware({ config, db, app }));
 
-	// api router
+	views({ config, db, app });
+
 	app.use('/api', api({ config, db }));
+
+	//essa middleware é responsável por deslogar o usuário
+	signout({ app });
 
 	app.server.listen(process.env.PORT || config.port, () => {
 		console.log(`Started on port ${app.server.address().port}`);

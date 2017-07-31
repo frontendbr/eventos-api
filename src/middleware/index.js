@@ -1,9 +1,16 @@
 const { Router } = require('express');
+const defaultMiddleware = require('./default-middleware-application');
+const passportMiddleware = require('./passport-middleware');
 
-module.exports = ( { config, db } ) => {
+
+module.exports = ({ config, db, app }) => {
   console.info('Init Middleware module');
-	let routes = Router();
-	// add middleware here
+  
+  const routes = Router();
+
+  defaultMiddleware({ config, app });
+
+	routes.use(passportMiddleware({ config, db }));
 
 	return routes;
 }
