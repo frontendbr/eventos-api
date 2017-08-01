@@ -25,7 +25,7 @@ initializeDb( db => {
 	app.use('/api', api({ config, db }));
 
 	//essa middleware é responsável por deslogar o usuário
-	signout({ app });
+	signout({ app, db });
 
 	app.server.listen(process.env.PORT || config.port, () => {
 		console.log(`Started on port ${app.server.address().port}`);

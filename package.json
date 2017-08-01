@@ -7,7 +7,7 @@
     "test": "mocha --timeout 10000 --recursive --reporter nyan",
     "testd": "mocha --debug-brk --timeout 10000 --recursive --reporter nyan",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "start": "node src",
+    "start": "node src --debug-brk",
     "debug": "DEBUG=* node src"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "config": "^1.26.1",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
+    "express-authentication": "^0.3.2",
     "express-session": "^1.15.3",
     "firebase": "^4.1.3",
     "firebase-admin": "^5.0.1",

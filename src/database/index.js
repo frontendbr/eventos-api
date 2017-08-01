@@ -8,8 +8,12 @@ module.exports = ( callback ) => {
   const database = firebase.database();
 
 	callback({
-    signOut : function(){
+    signOut : () => {
       return firebase.auth().signOut();
+    },
+
+    saveEvent:  (event) => {
+      return firebase.database().ref('events').push(event);
     }
   });
 }
