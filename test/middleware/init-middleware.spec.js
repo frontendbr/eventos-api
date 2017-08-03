@@ -5,12 +5,9 @@ const chai = require('chai');
 const sinonChai = require("sinon-chai");
 const should = chai.should();
 const assert = chai.assert;
-const proxyquire = require('proxyquire').noCallThru();
-chai.use(sinonChai);
-
-
-
 const mocks = require('../mock-utils');
+
+chai.use(sinonChai);
 
 describe('Middleware', () => {
 	describe('init', () => {

@@ -5,7 +5,6 @@ const chai = require('chai');
 const sinonChai = require("sinon-chai");
 const should = chai.should();
 const assert = chai.assert;
-
 const mocks = require('./mock-utils');
 
 describe('App', () => {

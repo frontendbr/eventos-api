@@ -5,8 +5,7 @@ module.exports = ( callback ) => {
   console.info('Init Database module');
 
   firebase.initializeApp(config.firebase);
-  const database = firebase.database();
-
+  
 	callback({
     signOut : () => {
       return firebase.auth().signOut();

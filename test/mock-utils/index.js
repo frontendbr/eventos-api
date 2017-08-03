@@ -18,6 +18,22 @@ const http = {
   createServer: () => { }
 };
 
+const firebase = {
+  initializeApp: () => { },
+  auth: () => {
+    signOut: () => { }
+  },
+  database: () => { ref: () => { push: () => { } } }
+
+};
+
+sinon.stub(firebase, 'initializeApp').returns(() => { });
+sinon.stub(firebase, 'database')
+  .returns({ ref: () => { return { push: () => { } } } });
+sinon.stub(firebase, 'auth')
+  .returns({ signOut: () => { } });
+
+
 const ht = sinon.stub(http, 'createServer');
 
 ht.returns({
@@ -49,6 +65,7 @@ store['./middleware/signout-middleware'] = signout;
 store['./default-middleware-application'] = defaultMiddleware;
 store['./passport-middleware'] = passportMiddleware;
 store['express-router'] = ex;
+store['firebase'] = firebase;
 
 function init(pathModule, modules) {
   const initialize = {};
