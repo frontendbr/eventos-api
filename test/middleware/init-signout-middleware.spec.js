@@ -63,7 +63,8 @@ describe('Signout', () => {
             const db = {
                 signOut: () => {}
             };
-            const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject)=>{ reject()}));
+            const dbSignout = sinon.stub(db, 'signOut')
+            .returns(new Promise((resolve, reject)=>{ reject({error: 'error'})}));
             
             signOut({ app, db });
 
