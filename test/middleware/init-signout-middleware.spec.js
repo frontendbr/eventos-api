@@ -27,26 +27,52 @@ describe('Signout', () => {
     });
 
     describe('should call signOut', function(){
-        const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
-        let callback;
+        it('return ok', function (){
+            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+            let callback;
 
-        const app = {
-            use: function(callback){
-                middleware = callback;
+            const app = {
+                use: function(callback){
+                    middleware = callback;
+                }
             }
-        }
 
-        const db = {
-            signOut: () => {}
-        };
-        const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject)=>{ resolve()}));
-        
-        signOut({ app, db });
+            const db = {
+                signOut: () => {}
+            };
+            const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject)=>{ resolve()}));
+            
+            signOut({ app, db });
 
-        //simulando a chamada do middleware
-        middleware();
+            //simulando a chamada do middleware
+            middleware();
 
-        dbSignout.should.have.been.called;
+            dbSignout.should.have.been.called;
+        }),
+
+        it('return error', function (){
+            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+            let callback;
+
+            const app = {
+                use: function(callback){
+                    middleware = callback;
+                }
+            }
+
+            const db = {
+                signOut: () => {}
+            };
+            const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject)=>{ reject()}));
+            
+            signOut({ app, db });
+
+            //simulando a chamada do middleware
+            middleware();
+
+            dbSignout.should.have.been.called;
+        })
+
 
 
     })
