@@ -6,6 +6,7 @@
     "clienteSecret": "8e1d50fb000071ebd47a7c970fce9365c831f287",
     "callbackURL": "http://192.168.1.80:3000/auth/github/callback"
   },
+  "serviceAccountAdminPath": "./firebase-admin-sdk.json",
   "firebase": {
     "apiKey": "AIzaSyDClNYE54DCbk5y91sf-_MCYLIfkto6zwk",
     "authDomain": "frontend-br-eventos.firebaseapp.com",

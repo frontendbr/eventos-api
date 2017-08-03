@@ -33,6 +33,9 @@ sinon.stub(firebase, 'database')
 sinon.stub(firebase, 'auth')
   .returns({ signOut: () => { } });
 
+const firebaseAdmin = { initializeApp: () => { }, credential: { cert: () => { } } };
+
+sinon.stub(firebaseAdmin, 'initializeApp');
 
 const ht = sinon.stub(http, 'createServer');
 
@@ -66,6 +69,8 @@ store['./default-middleware-application'] = defaultMiddleware;
 store['./passport-middleware'] = passportMiddleware;
 store['express-router'] = ex;
 store['firebase'] = firebase;
+store['firebase-admin'] = firebaseAdmin;
+
 
 function init(pathModule, modules) {
   const initialize = {};
