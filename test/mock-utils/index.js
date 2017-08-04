@@ -18,14 +18,7 @@ const http = {
   createServer: () => { }
 };
 
-const firebase = {
-  initializeApp: () => { },
-  auth: () => {
-    signOut: () => { }
-  },
-  database: () => { ref: () => { push: () => { } } }
-
-};
+const firebase = require('./firebase.js');
 
 sinon.stub(firebase, 'initializeApp').returns(() => { });
 sinon.stub(firebase, 'database')
