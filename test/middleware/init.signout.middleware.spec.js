@@ -10,38 +10,43 @@ const mocks = require('../mock-utils');
 chai.use(sinonChai);
 
 describe('Signout', () => {
-	describe('init', () => {
-	  it('correct', () => {
-			const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
-            
-            const app = mocks.getModule('express')();
+    describe('init', () => {
+        let app;
+        it('correct', () => {
+            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+
+            app = mocks.getModule('express')();
             const useApp = sinon.stub(app, 'use');
 
             const db = mocks.getModule('./database');
             const dbSignout = sinon.stub(db, 'signOut');
 
             assert.isNotNull(signOut({ app, db }));
-			useApp.should.have.been.called;
-			db.should.have.been.called;
-      });          
+            useApp.should.have.been.called;
+            db.should.have.been.called;
+        });
+
+        after(function () {
+            app.use.restore(); // Unwraps the spy
+        });
     });
 
-    describe('should call signOut', function(){
-        it('return ok', function (){
+    describe('should call signOut', function () {
+        it('return ok', function () {
             const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
-            let callback;
+            let middleware;
 
             const app = {
-                use: function(callback){
+                use: function (callback) {
                     middleware = callback;
                 }
             }
 
             const db = {
-                signOut: () => {}
+                signOut: () => { }
             };
-            const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject)=>{ resolve()}));
-            
+            const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject) => { resolve() }));
+
             signOut({ app, db });
 
             //simulando a chamada do middleware
@@ -50,29 +55,29 @@ describe('Signout', () => {
             dbSignout.should.have.been.called;
         }),
 
-        it('return error', function (){
-            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
-            let callback;
+            it('return error', function () {
+                const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+                let callback;
 
-            const app = {
-                use: function(callback){
-                    middleware = callback;
+                const app = {
+                    use: function (callback) {
+                        middleware = callback;
+                    }
                 }
-            }
 
-            const db = {
-                signOut: () => {}
-            };
-            const dbSignout = sinon.stub(db, 'signOut')
-            .returns(new Promise((resolve, reject)=>{ reject({error: 'error'})}));
-            
-            signOut({ app, db });
+                const db = {
+                    signOut: () => { }
+                };
+                const dbSignout = sinon.stub(db, 'signOut')
+                    .returns(new Promise((resolve, reject) => { reject({ error: 'error' }) }));
 
-            //simulando a chamada do middleware
-            middleware();
+                signOut({ app, db });
 
-            dbSignout.should.have.been.called;
-        })
+                //simulando a chamada do middleware
+                middleware();
+
+                dbSignout.should.have.been.called;
+            })
 
 
 
