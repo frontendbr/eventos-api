@@ -1,5 +1,6 @@
 const proxyquireStrict = require('proxyquire').noCallThru();
 const sinon = require('sinon');
+const firebasemock = require('firebase-mock');
 const { assert } = require('chai');
 
 const database = sinon.spy((callback) => {
@@ -10,21 +11,24 @@ const database = sinon.spy((callback) => {
 
 const express = require('./express');
 
-ex = sinon.stub(express, 'Router');
-ex.returns({
-  use: () => { }
-});
 const http = {
   createServer: () => { }
 };
 
-const firebase = require('./firebase.js');
+var mockdatabase = new firebasemock.MockFirebase();
+var mockauth = new firebasemock.MockFirebase();
+var firebase = firebasemock.MockFirebaseSdk(function (path) {
+  return mockdatabase.child(path);
+}, function () {
+  return mockauth;
+});
+
 
 sinon.stub(firebase, 'initializeApp').returns(() => { });
 sinon.stub(firebase, 'database')
   .returns({ ref: () => { return { push: () => { } } } });
 sinon.stub(firebase, 'auth')
-  .returns({ signOut: () => { } });
+  .returns({ signOut: () => { }, signInWithCredential: () => { } });
 
 const firebaseAdmin = { initializeApp: () => { }, credential: { cert: () => { } } };
 
@@ -60,7 +64,7 @@ store['./api'] = api;
 store['./middleware/signout-middleware'] = signout;
 store['./default-middleware-application'] = defaultMiddleware;
 store['./passport-middleware'] = passportMiddleware;
-store['express-router'] = ex;
+//store['express-router'] = express;
 store['firebase'] = firebase;
 store['firebase-admin'] = firebaseAdmin;
 

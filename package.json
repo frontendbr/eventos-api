@@ -40,13 +40,14 @@
     "swagger-ui-express": "^2.0.1"
   },
   "devDependencies": {
-    "now": "^7.2.4",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "coveralls": "^2.13.1",
+    "firebase-mock": "^1.1.5",
     "istanbul": "^0.4.5",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.3.0",
+    "now": "^7.2.4",
     "proxyquire": "^1.8.0",
     "sinon": "^2.3.8",
     "sinon-chai": "^2.12.0"

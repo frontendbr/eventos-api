@@ -12,12 +12,16 @@ chai.use(sinonChai);
 describe('Middleware', () => {
 	describe('init', () => {
 		it('correct', () => {
+			const router = sinon.stub(mocks.getModule('express'), 'Router');
+			router.returns(mocks.getModule('express')());
+
+
 			const middleware = mocks.init(__dirname + '/../../src/middleware/', ['express',
 				'./default-middleware-application',
 				'./passport-middleware']);
 
 			assert.isNotNull(middleware({}));
-			mocks.getModule('express-router').should.have.been.called;
+			router.should.have.been.called;
 			mocks.getModule('./passport-middleware').should.have.been.called;
 			mocks.getModule('./default-middleware-application').should.have.been.called;
 		});
