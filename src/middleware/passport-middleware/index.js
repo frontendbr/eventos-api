@@ -2,12 +2,12 @@ const { Router } = require('express');
 const { Strategy } = require('passport-github2');
 const passport = require('passport');
 const firebase = require('firebase');
-const admin = require('../../admin-firebase')();
+const adminFirebase = require('../../admin-firebase');
 
 module.exports = ({ config, db }) => {
   console.info('Init Middleware Passport module');
   const routes = Router();
-
+  const admin = adminFirebase({ config });
 
   const GITHUB_CLIENT_ID = config.github.clienteId;
   const GITHUB_CLIENT_SECRET = config.github.clienteSecret;

@@ -1,4 +1,4 @@
-module.exports = ({ app }) => {
+module.exports = ({ app, db }) => {
   app.use(( req, res, next ) => {
     db.signOut().then(function() {
       console.log('Signed Out');
