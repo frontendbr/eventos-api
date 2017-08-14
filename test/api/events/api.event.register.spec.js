@@ -26,14 +26,30 @@ describe('Event', () => {
             const loginManager = { authentication: () => { } };
             sinon.stub(loginManager, 'authentication');
 
-            
+
             const router = eventRegister({ loginManager });
-            
+
             //simulando chamada do middleware
             const post = router.captur()[0][2]();
 
             loginManager.authentication.should.have.been.called;
 
+        });
+
+        it('route with success', () => {
+            const loginManager = { authentication: () => { } };
+            const db = { saveEvent: () => { } };
+            sinon.stub(db, 'saveEvent').returns(new Promise((resolve, reject) => { resolve({}) }));
+
+            const req = { get: () => { return 'token' } };
+            const res = { status: () => { } };
+            const next = () => { };
+            const router = eventRegister({ loginManager, db });
+
+            //simulando chamada do middleware
+            const post = router.captur()[0][3](req, res, next);
+
+            db.saveEvent.should.have.been.called;
         });
     });
 

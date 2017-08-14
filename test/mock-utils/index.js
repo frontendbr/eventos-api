@@ -64,7 +64,6 @@ store['./api'] = api;
 store['./middleware/signout-middleware'] = signout;
 store['./default-middleware-application'] = defaultMiddleware;
 store['./passport-middleware'] = passportMiddleware;
-//store['express-router'] = express;
 store['firebase'] = firebase;
 store['firebase-admin'] = firebaseAdmin;
 

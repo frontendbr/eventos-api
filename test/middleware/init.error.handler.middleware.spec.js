@@ -25,7 +25,7 @@ describe('Error Handler Middleware', () => {
         });
 
         after(function () {
-            app.use.restore(); // Unwraps the spy
+            app.use.restore();
         });
     });
 

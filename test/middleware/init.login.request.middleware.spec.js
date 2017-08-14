@@ -48,8 +48,7 @@ describe('Login Request Module', () => {
 
                 const next = {};
                 //simulando a chamada do middleware
-//                loginRequest({}).authentication(req, res, next);
-  //              status.should.have.been.calledWith(401);
+                loginRequest({}).authentication(req, res, next);
 
             });
         });
