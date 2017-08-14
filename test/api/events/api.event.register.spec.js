@@ -41,7 +41,7 @@ describe('Event', () => {
             const db = { saveEvent: () => { } };
             sinon.stub(db, 'saveEvent').returns(new Promise((resolve, reject) => { resolve({}) }));
 
-            const req = { get: () => { return 'token' } };
+            const req = { body: {} };
             const res = { status: () => { } };
             const next = () => { };
             const router = eventRegister({ loginManager, db });

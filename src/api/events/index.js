@@ -10,9 +10,20 @@ module.exports = ({ config, db, loginManager }) => {
         validate(validations.createEvent),
         loginManager.authentication,
         (req, res, next) => {
+            
+            const event = {
+                title: req.body.title,
+                date: req.body.date,
+                zipCode: req.body.zipCode || "",
+                local: req.body.local,
+                shortDescription: req.body.shortDescription,
+                price: req.body.price,
+                eventLink: req.body.eventLink,
+                pending: true
+            };
 
-            db.saveEvent(req.body).then(() => {
-                res.json(req.body);
+            db.saveEvent(event).then((savedEvent) => {
+                res.json(savedEvent);
                 next();
             }).catch(() => {
                 res.status(500).json({ error: 'Event no registered, please try again' });

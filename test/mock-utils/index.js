@@ -26,7 +26,7 @@ var firebase = firebasemock.MockFirebaseSdk(function (path) {
 
 sinon.stub(firebase, 'initializeApp').returns(() => { });
 sinon.stub(firebase, 'database')
-  .returns({ ref: () => { return { push: () => { } } } });
+  .returns({ ref: () => { return { push: () => {return new Promise((resolve, reject) => { resolve({}) }) } } } });
 sinon.stub(firebase, 'auth')
   .returns({ signOut: () => { }, signInWithCredential: () => { } });
 
