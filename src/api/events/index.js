@@ -6,6 +6,15 @@ module.exports = ({ config, db, loginManager }) => {
     console.info('Init Events module');
     const route = Router();
 
+    route.get('/event',
+    (req, res, next) => {
+        db.listEvent({})
+        .then((events)=>{
+            res.json(events);
+            next();
+        });
+    });
+
     route.post('/event',
         validate(validations.createEvent),
         loginManager.authentication,
