@@ -6,20 +6,11 @@ module.exports = ({ config, db, loginManager }) => {
     console.info('Init Events module');
     const route = Router();
 
-    route.get('/event',
-    (req, res, next) => {
-        db.listEvent({})
-        .then((events)=>{
-            res.json(events);
-            next();
-        });
-    });
-
     route.post('/event',
         validate(validations.createEvent),
         loginManager.authentication,
         (req, res, next) => {
-            
+
             const event = {
                 title: req.body.title,
                 date: req.body.date,
@@ -40,6 +31,16 @@ module.exports = ({ config, db, loginManager }) => {
             });
 
         });
+
+    route.get('/event',
+        (req, res, next) => {
+            db.listEvent({ filter: req.query })
+                .then((events) => {
+                    res.json(events);
+                    next();
+                });
+        });
+
 
     return route;
 }
