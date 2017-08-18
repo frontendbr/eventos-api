@@ -17,7 +17,7 @@ module.exports = {
                 if (offsetCount >= offset) {
                     const event = childSnapshot.val();
                     event.key = childSnapshot.key;
-                    if (eventMatchFilter({ event, filter })) {
+                    if (!event.pending && eventMatchFilter({ event, filter })) {
                         events.push(event);
                     } else {
                         offsetCount--;
