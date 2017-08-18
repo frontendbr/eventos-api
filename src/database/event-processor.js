@@ -1,7 +1,8 @@
+const eventFilter = require('./event-filter');
 
 const eventMatchFilter = ({ event, filter }) => {
-    //TODO insensitive case
-    return (event.title.indexOf(filter.keywords) > -1);
+    const { month, state, keywords } = filter;
+    return eventFilter({ event, month, state, keywords });
 }
 
 module.exports = {
