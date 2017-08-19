@@ -7,7 +7,7 @@ const eventMatchFilter = ({ event, filter }) => {
 
 module.exports = {
     process: ({ filter, snapshot }) => {
-        const { month, state, keywords, offset = 0, limit = 30 } = filter;
+        const { offset = 0, limit = 30 } = filter;
 
         let offsetCount = 0;
 
