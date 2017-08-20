@@ -11,14 +11,14 @@ module.exports = (callback) => {
     signOut: () => {
       return firebase.auth().signOut();
     },
-    listEvent: ({ filter }) => {
+    listEvent: ({ filter, pending = false }) => {
       return new Promise((resolve, resject) => {
         firebase
           .database()
           .ref('events')
           .orderByChild('title')
           .once('value', (snapshot) => {
-            const events = eventProcessor.process({ filter, snapshot });
+            const events = eventProcessor.process({ filter, pending, snapshot });
             resolve(events);
           });
       });

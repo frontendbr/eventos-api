@@ -34,6 +34,15 @@ module.exports = ({ config, db, loginManager }) => {
                 });
         });
 
+    route.get('/event/pending',
+        loginManager.authentication,
+        (req, res, next) => {
+            db.listEvent({ filter: req.query, pending: true })
+                .then((events) => {
+                    res.json(events);
+                    next();
+                });
+        });
 
     return route;
 }

@@ -6,7 +6,7 @@ const eventMatchFilter = ({ event, filter }) => {
 }
 
 module.exports = {
-    process: ({ filter, snapshot }) => {
+    process: ({ filter, pending, snapshot }) => {
         const { offset = 0, limit = 30 } = filter;
 
         let offsetCount = 0;
@@ -17,7 +17,7 @@ module.exports = {
                 if (offsetCount >= offset) {
                     const event = childSnapshot.val();
                     event.key = childSnapshot.key;
-                    if (!event.pending && eventMatchFilter({ event, filter })) {
+                    if (event.pending === pending && eventMatchFilter({ event, filter })) {
                         events.push(event);
                     } else {
                         offsetCount--;
