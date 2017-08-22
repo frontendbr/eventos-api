@@ -11,6 +11,4 @@ after_success:
 - test $TRAVIS_BRANCH = "master_desativado" && test $TRAVIS_PULL_REQUEST = "false" && now -t
   $TOKEN_NOW --public alias
 before_install:
-- openssl aes-256-cbc -K $encrypted_ed4734b58a5b_key -iv $encrypted_ed4734b58a5b_iv
-  -in frontend-br-eventos-firebase-adminsdk-cwau8-feba252aa4.json.enc -out src/admin-firebase/frontend-br-eventos-firebase-adminsdk-cwau8-feba252aa4.json
-  -d
+
