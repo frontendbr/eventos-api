@@ -13,7 +13,7 @@ describe('Signout', () => {
     describe('init', () => {
         let app;
         it('correct', () => {
-            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+            const signOut = mocks.init(__dirname + '/../../server/middleware/signout-middleware', []);
 
             app = mocks.getModule('express')();
             const useApp = sinon.stub(app, 'use');
@@ -33,7 +33,7 @@ describe('Signout', () => {
 
     describe('should call signOut', function () {
         it('return ok', function () {
-            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+            const signOut = mocks.init(__dirname + '/../../server/middleware/signout-middleware', []);
             let middleware;
 
             const app = {
@@ -56,7 +56,7 @@ describe('Signout', () => {
         }),
 
             it('return error', function () {
-                const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+                const signOut = mocks.init(__dirname + '/../../server/middleware/signout-middleware', []);
                 let callback;
 
                 const app = {

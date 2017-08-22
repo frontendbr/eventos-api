@@ -12,7 +12,7 @@ chai.use(sinonChai);
 describe('Login Request Module', () => {
     describe('init', () => {
         it('correct', () => {
-            const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+            const loginRequest = mocks.init('../../server/middleware/login-request-middleware', ['firebase']);
 
             assert.isFunction(loginRequest);
             assert.isObject(loginRequest({}));
@@ -22,7 +22,7 @@ describe('Login Request Module', () => {
     describe('should execute authentication', () => {
         describe('and return error', () => {
             it('when not have Authorization', () => {
-                const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+                const loginRequest = mocks.init('../../server/middleware/login-request-middleware', ['firebase']);
                 const req = { get: () => { } };
                 const res = { status: () => { } };
 
@@ -35,7 +35,7 @@ describe('Login Request Module', () => {
             });
             it('when not have credential valid', () => {
 
-                const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+                const loginRequest = mocks.init('../../server/middleware/login-request-middleware', ['firebase']);
 
                 const firebase = mocks.getModule('firebase');
 

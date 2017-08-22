@@ -13,7 +13,7 @@ describe('Error Handler Middleware', () => {
     describe('init', () => {
         let app;
         it('correct', () => {
-            const error = mocks.init('../../src/middleware/error-handler-middleware', []);
+            const error = mocks.init('../../server/middleware/error-handler-middleware', []);
 
             app = mocks.getModule('express')();
             const useApp = sinon.stub(app, 'use');
@@ -31,7 +31,7 @@ describe('Error Handler Middleware', () => {
 
     describe('should call the use', () => {
         it('for validation', () => {
-            const error = mocks.init('../../src/middleware/error-handler-middleware', []);
+            const error = mocks.init('../../server/middleware/error-handler-middleware', []);
             let callback;
             const expressValidation = require('express-validation');
             const app = {
@@ -58,7 +58,7 @@ describe('Error Handler Middleware', () => {
         });
 
         it('for error commom', () => {
-            const error = mocks.init('../../src/middleware/error-handler-middleware', []);
+            const error = mocks.init('../../server/middleware/error-handler-middleware', []);
             let callback;
             const expressValidation = require('express-validation');
             const app = {

@@ -13,7 +13,7 @@ describe('Database', () => {
     let dbInit;
 
     beforeEach(() => {
-        dbInit = mocks.init('../../src/database', ['firebase']);
+        dbInit = mocks.init('../../server/database', ['firebase']);
     });
 
     describe('init', () => {

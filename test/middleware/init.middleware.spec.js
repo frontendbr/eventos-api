@@ -16,7 +16,7 @@ describe('Middleware', () => {
 			router.returns(mocks.getModule('express')());
 
 
-			const middleware = mocks.init(__dirname + '/../../src/middleware/', ['express',
+			const middleware = mocks.init(__dirname + '/../../server/middleware/', ['express',
 				'./default-middleware-application',
 				'./passport-middleware']);
 

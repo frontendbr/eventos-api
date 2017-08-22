@@ -8,7 +8,7 @@ const assert = chai.assert;
 
 chai.use(sinonChai);
 
-const processor = require('../../src/database/event-processor');
+const processor = require('../../server/database/event-processor');
 
 
 describe('Give a list', () => {

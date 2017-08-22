@@ -10,7 +10,7 @@ const mocks = require('./mock-utils');
 describe('App', () => {
 	describe('init', () => {
 		it('correct', () => {
-			const app = mocks.init(__dirname + '/../src', ['express',
+			const app = mocks.init(__dirname + '/../server', ['express',
 				'http',
 				'./database',
 				'./middleware',

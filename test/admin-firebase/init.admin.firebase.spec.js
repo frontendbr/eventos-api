@@ -12,14 +12,14 @@ chai.use(sinonChai);
 describe('Admin Firebase', () => {
     describe('init', () => {
         it('correct', () => {
-           const adm =  mocks.init('../../src/admin-firebase',['firebase-admin']);
+           const adm =  mocks.init('../../server/admin-firebase',['firebase-admin']);
            assert.isFunction(adm);
            assert.isNotNull(adm({ config: { serviceAccountAdminPath: './firebase-admin-sdk-test.json' }}));
         })
     })
     describe('when have config', () => {
         it('have call initialize', () => {
-           const adm =  mocks.init('../../src/admin-firebase',['firebase-admin']);
+           const adm =  mocks.init('../../server/admin-firebase',['firebase-admin']);
            assert.isFunction(adm);
            assert.isNotNull(adm({ config: { serviceAccountAdminPath: '../../test/admin-firebase/firebase-admin-sdk-test.json' }}));
            mocks.getModule('firebase-admin').initializeApp.should.have.been.called;

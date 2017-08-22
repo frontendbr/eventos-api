@@ -8,7 +8,7 @@ const assert = chai.assert;
 
 chai.use(sinonChai);
 
-const filter = require('../../src/database/event-filter');
+const filter = require('../../server/database/event-filter');
 
 describe('Given title \'Um evento\'', () => {
     const event = {

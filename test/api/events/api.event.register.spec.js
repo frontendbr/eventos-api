@@ -14,7 +14,7 @@ describe('Event', () => {
     describe('need call middleware', () => {
         let eventRegister;
         beforeEach(() => {
-            eventRegister = mocks.init('../../src/api/events', ['express']);
+            eventRegister = mocks.init('../../server/api/events', ['express']);
             mocks.getModule('express').initCapture();
         });
 
