@@ -11,7 +11,7 @@ module.exports = ({ config, db, loginManager }) => {
         validate(validations.createEvent),
         loginManager.authentication,
         (req, res, next) => {
-            const event = eventFactory(req.body);
+            const event = eventFactory.insert(req.body);
 
             db.saveEvent(event).then((savedEvent) => {
                 res.json(savedEvent);
@@ -39,7 +39,7 @@ module.exports = ({ config, db, loginManager }) => {
         loginManager.admin,
         (req, res, next) => {
             const eventId = req.params.eventId;
-            const event = eventFactory(req.body);
+            const event = eventFactory.update(req.body);
 
             db
                 .updateEvent(eventId, event)

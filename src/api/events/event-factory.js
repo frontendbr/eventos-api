@@ -1,4 +1,13 @@
-module.exports = (body) => {
+const update = (body) => {
+    const event = insert(body);
+    if (body.approve) {
+        event.pending = false;
+    }
+
+    return event;
+}
+
+const insert = (body) => {
     const location = body.location;
 
     location.locationUrl = location.locationUrl || '';
@@ -18,3 +27,8 @@ module.exports = (body) => {
     };
 }
 
+
+module.exports = {
+    insert,
+    update
+}
