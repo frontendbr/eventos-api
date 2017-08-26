@@ -25,7 +25,7 @@ module.exports = (callback) => {
       });
     },
 
-    listAdmins:  () => {
+    listAdmins: () => {
       return new Promise((resolve, reject) => {
         firebase
           .database()
@@ -43,7 +43,14 @@ module.exports = (callback) => {
         .ref('admins')
         .push(email);
     },
-      
+
+    updateEvent: (key, event) => {
+      return firebase
+        .database()
+        .ref()
+        .child('/events/' + key)
+        .update(event);
+    },
     saveEvent: (event) => {
       return firebase
         .database()

@@ -18,7 +18,7 @@ module.exports = ({ config, db, loginManager }) => {
                 next();
             }).catch((error) => {
                 console.log(error);
-                
+
                 res.status(500).json({ error: 'Event no registered, please try again' });
                 next();
             });
@@ -38,11 +38,15 @@ module.exports = ({ config, db, loginManager }) => {
         validate(validations.createEvent),
         loginManager.admin,
         (req, res, next) => {
-             var eventId = req.params.eventId;
-             const event = eventFactory(req.body);
-             
-             res.status(200).json({});
-             next();
+            const eventId = req.params.eventId;
+            const event = eventFactory(req.body);
+
+            db
+                .updateEvent(eventId, event)
+                .then(() => {
+                    res.status(200).json({});
+                    next();
+                })
         });
 
     route.get('/event/pending',
