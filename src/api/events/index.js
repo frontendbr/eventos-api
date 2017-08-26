@@ -34,6 +34,17 @@ module.exports = ({ config, db, loginManager }) => {
                 });
         });
 
+    route.put('/event/:eventId',
+        validate(validations.createEvent),
+        loginManager.admin,
+        (req, res, next) => {
+             var eventId = req.params.eventId;
+             const event = eventFactory(req.body);
+             
+             res.status(200).json({});
+             next();
+        });
+
     route.get('/event/pending',
         loginManager.authentication,
         (req, res, next) => {

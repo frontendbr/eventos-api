@@ -1,6 +1,7 @@
 const firebase = require('firebase');
 const config = require('config');
 const eventProcessor = require('./event-processor');
+const adminProcessor = require('./admin-processor');
 
 module.exports = (callback) => {
   console.info('Init Database module');
@@ -23,6 +24,26 @@ module.exports = (callback) => {
           });
       });
     },
+
+    listAdmins:  () => {
+      return new Promise((resolve, reject) => {
+        firebase
+          .database()
+          .ref('admins')
+          .once('value', (snapshot) => {
+            const admins = adminProcessor.process({ snapshot });
+            resolve(admins);
+          });
+      });
+    },
+
+    addAdmin: ({ email }) => {
+      return firebase
+        .database()
+        .ref('admins')
+        .push(email);
+    },
+      
     saveEvent: (event) => {
       return firebase
         .database()
