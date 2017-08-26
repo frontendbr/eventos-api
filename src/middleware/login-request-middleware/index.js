@@ -74,7 +74,7 @@ module.exports = ({ config, db }) => {
     }
 
     return {
-        authentication: authentication,
+        authentication,
         admin
     }
 }

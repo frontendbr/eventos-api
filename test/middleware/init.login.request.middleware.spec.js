@@ -19,6 +19,44 @@ describe('Login Request Module', () => {
             assert.isFunction(loginRequest({}).authentication);
         });
     });
+    describe('should execute admin', () => {
+        describe('and return error', () => {
+            it('when not have Authorization', () => {
+                const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+                const req = { get: () => { } };
+                const res = { status: () => { } };
+
+                const status = sinon.stub(res, 'status').returns({ json: () => { } });
+
+                const next = {};
+                //simulando a chamada do middleware
+                loginRequest({}).admin(req, res, next);
+                status.should.have.been.calledWith(401);
+            });
+            it('when not have credential valid', () => {
+
+                const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+
+                const firebase = mocks.getModule('firebase');
+
+                const req = { get: () => { return 'token' } };
+                const res = { status: () => { } };
+
+                const status = sinon.stub(res, 'status').returns({ json: () => { } });
+
+                const sign = sinon.stub(firebase.auth(), 'signInWithCredential').returns(new Promise((resolve, reject) => { reject({ error: 'error' }) }));
+
+                const next = {};
+                //simulando a chamada do middleware
+                loginRequest({}).admin(req, res, next);
+
+            });
+        });
+        after(() => {
+            const firebase = mocks.getModule('firebase');
+            firebase.auth().signInWithCredential.restore();
+        });
+    });
     describe('should execute authentication', () => {
         describe('and return error', () => {
             it('when not have Authorization', () => {
@@ -51,6 +89,11 @@ describe('Login Request Module', () => {
                 loginRequest({}).authentication(req, res, next);
 
             });
+        });
+
+        after(() => {
+            const firebase = mocks.getModule('firebase');
+            firebase.auth().signInWithCredential.restore();
         });
     });
 });
