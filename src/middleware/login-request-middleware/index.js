@@ -31,6 +31,7 @@ module.exports = ({ config, db }) => {
     const authentication = (req, res, next) => {
         const accessToken = req.get('Authorization');
         const reject = (error) => {
+            console.log('rejec', res.status);
             res
                 .status(401)
                 .json(error);

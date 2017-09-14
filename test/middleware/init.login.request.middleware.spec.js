@@ -51,6 +51,7 @@ describe('Login Request Module', () => {
                 loginRequest({}).admin(req, res, next);
 
             });
+
         });
         after(() => {
             const firebase = mocks.getModule('firebase');
@@ -58,6 +59,40 @@ describe('Login Request Module', () => {
         });
     });
     describe('should execute authentication', () => {
+        describe('and return success', () => {
+            it('when have credential valid', (done) => {
+
+                const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+
+                const firebase = mocks.getModule('firebase');
+
+                const req = { get: () => { return 'token' } };
+                const res = { status: () => { } };
+
+                const status = sinon.stub(res, 'status').returns({ json: () => { } });
+
+                const sign = sinon.stub(firebase.auth(), 'signInWithCredential').returns(new Promise((resolve, reject) => {
+                    resolve({ email: 't@tes.com.br' });
+                }));
+
+                const next = sinon.spy(() => { 
+                    next.should.have.been.called;
+                    done();
+                });
+                //simulando a chamada do middleware
+                loginRequest({}).authentication(req, res, next);
+
+                
+
+            });
+
+            after(() => {
+                const firebase = mocks.getModule('firebase');
+                firebase.auth().signInWithCredential.restore();
+            });
+
+        });
+
         describe('and return error', () => {
             it('when not have Authorization', () => {
                 const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
@@ -71,7 +106,7 @@ describe('Login Request Module', () => {
                 loginRequest({}).authentication(req, res, next);
                 status.should.have.been.calledWith(401);
             });
-            it('when not have credential valid', () => {
+            it('when not have credential valid', (done) => {
 
                 const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
 
@@ -80,14 +115,17 @@ describe('Login Request Module', () => {
                 const req = { get: () => { return 'token' } };
                 const res = { status: () => { } };
 
-                const status = sinon.stub(res, 'status').returns({ json: () => { } });
+                const status = sinon.stub(res, 'status').returns({ json: () => { 
+                    status.should.have.been.calledWith(401);
+                    done();
+                } });
 
                 const sign = sinon.stub(firebase.auth(), 'signInWithCredential').returns(new Promise((resolve, reject) => { reject({ error: 'error' }) }));
 
                 const next = {};
                 //simulando a chamada do middleware
                 loginRequest({}).authentication(req, res, next);
-
+                
             });
         });
 
