@@ -17,6 +17,7 @@ describe('Login Request Module', () => {
             assert.isFunction(loginRequest);
             assert.isObject(loginRequest({}));
             assert.isFunction(loginRequest({}).authentication);
+            assert.isFunction(loginRequest({}).admin);
         });
     });
     describe('should execute admin', () => {
@@ -52,10 +53,84 @@ describe('Login Request Module', () => {
 
             });
 
+            it('when not has admin email valid', (done) => {
+
+                const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+
+                const firebase = mocks.getModule('firebase');
+
+                const req = { get: () => { return 'token' } };
+                const res = { status: () => { } };
+
+                const status = sinon.stub(res, 'status').returns({ json: () => { 
+                    status.should.have.been.calledWith(401);
+                    done();
+                } });
+
+                const sign = sinon.stub(firebase.auth(), 'signInWithCredential').returns(new Promise((resolve, reject) => {
+                    resolve({ email: 't@tes.com.br' });
+                }));
+
+                const next = sinon.spy(() => { 
+                });
+                
+                const db = {
+                    listAdmins: () =>  {
+                        return new Promise((resolve, reject) => {
+                            resolve(['t1@tes.com.br']);
+                        });
+                    }
+                }
+
+                //simulando a chamada do middleware
+                loginRequest({ db }).admin(req, res, next);
+            });
+
+            afterEach(() => {
+                const firebase = mocks.getModule('firebase');
+                if(firebase.auth().signInWithCredential.restore)
+                    firebase.auth().signInWithCredential.restore();
+            });
         });
-        after(() => {
-            const firebase = mocks.getModule('firebase');
-            firebase.auth().signInWithCredential.restore();
+
+        describe('and return success', () => {
+            it('when has admin email valid', (done) => {
+
+                const loginRequest = mocks.init('../../src/middleware/login-request-middleware', ['firebase']);
+
+                const firebase = mocks.getModule('firebase');
+
+                const req = { get: () => { return 'token' } };
+                const res = { status: () => { } };
+
+                const status = sinon.stub(res, 'status').returns({ json: () => { } });
+
+                const sign = sinon.stub(firebase.auth(), 'signInWithCredential').returns(new Promise((resolve, reject) => {
+                    resolve({ email: 't@tes.com.br' });
+                }));
+
+                const next = sinon.spy(() => { 
+                    next.should.have.been.called;
+                    done();
+                });
+                
+                const db = {
+                    listAdmins: () =>  {
+                        return new Promise((resolve, reject) => {
+                            resolve(['t@tes.com.br']);
+                        });
+                    }
+                }
+
+                //simulando a chamada do middleware
+                loginRequest({ db }).admin(req, res, next);
+            });
+
+            after(() => {
+                const firebase = mocks.getModule('firebase');
+                firebase.auth().signInWithCredential.restore();
+            });
+
         });
     });
     describe('should execute authentication', () => {
@@ -81,9 +156,6 @@ describe('Login Request Module', () => {
                 });
                 //simulando a chamada do middleware
                 loginRequest({}).authentication(req, res, next);
-
-                
-
             });
 
             after(() => {

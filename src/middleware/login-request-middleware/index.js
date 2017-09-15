@@ -31,7 +31,6 @@ module.exports = ({ config, db }) => {
     const authentication = (req, res, next) => {
         const accessToken = req.get('Authorization');
         const reject = (error) => {
-            console.log('rejec', res.status);
             res
                 .status(401)
                 .json(error);
@@ -57,10 +56,12 @@ module.exports = ({ config, db }) => {
             db
                 .listAdmins()
                 .then((admins) => {
+                    
                     if (admins.indexOf(user.email) > -1) {
                         req.authentication = { user: user };
                         next();
                     } else {
+                        console.log('reject!')
                         reject({
                             status: 401,
                             message: "is necessary been admin"

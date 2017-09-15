@@ -5,7 +5,7 @@ module.exports = ({ config, db, loginManager }) => {
     const route = Router();
 
     route.post('/admin',
-        loginManager.authentication,
+        loginManager.admin,
         (req, res, next) => {
             const admin = req.body;
             db.addAdmin(admin)
