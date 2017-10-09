@@ -35,7 +35,7 @@ module.exports = ({ config, db, loginManager }) => {
         });
 
     route.put('/event/:eventId',
-        validate(validations.createEvent),
+        validate(validations.updateEvent),
         loginManager.admin,
         (req, res, next) => {
             const eventId = req.params.eventId;
