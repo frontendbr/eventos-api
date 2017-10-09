@@ -51,6 +51,11 @@ class Router {
     this.capture.push(arguments);
   }
 
+  put(){
+    if (!this.capture) this.capture = [];
+    this.capture.push(arguments);
+  }
+
   captur(){
     return this.capture;
   }
@@ -62,3 +67,4 @@ const obj = {
 obj.use = _capture;
 obj.get = _capture;
 obj.post = _capture;
+obj.put = _capture;

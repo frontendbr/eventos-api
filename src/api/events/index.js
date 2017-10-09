@@ -11,14 +11,14 @@ module.exports = ({ config, db, loginManager }) => {
         validate(validations.createEvent),
         loginManager.authentication,
         (req, res, next) => {
-            const event = eventFactory(req.body);
+            const event = eventFactory.insert(req.body);
 
             db.saveEvent(event).then((savedEvent) => {
                 res.json(savedEvent);
                 next();
             }).catch((error) => {
                 console.log(error);
-                
+
                 res.status(500).json({ error: 'Event no registered, please try again' });
                 next();
             });
@@ -32,6 +32,21 @@ module.exports = ({ config, db, loginManager }) => {
                     res.json(events);
                     next();
                 });
+        });
+
+    route.put('/event/:eventId',
+        validate(validations.updateEvent),
+        loginManager.admin,
+        (req, res, next) => {
+            const eventId = req.params.eventId;
+            const event = eventFactory.update(req.body);
+
+            db
+                .updateEvent(eventId, event)
+                .then(() => {
+                    res.status(200).json({});
+                    next();
+                })
         });
 
     route.get('/event/pending',
