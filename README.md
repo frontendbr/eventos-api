@@ -23,4 +23,4 @@ Você pode, se desejar, configurar uma aplicação do github através do arquivo
 
 Para rodar, basta executar `npm i` na raiz, em seguida `npm start`.
 
-Dúvidas? Sinta-se a vontade para avri uma issue.
+Dúvidas? Sinta-se a vontade para abrir uma issue.
