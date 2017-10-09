@@ -59,5 +59,16 @@ module.exports = ({ config, db, loginManager }) => {
                 });
         });
 
+    route.get('/event/:eventId',
+        (req, res, next) => {
+            const eventId = req.params.eventId;
+            db
+                .getEvent(eventId)
+                .then((event) => {
+                    res.json(event);
+                    next();
+                })
+        });    
+
     return route;
 }

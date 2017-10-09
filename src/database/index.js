@@ -84,6 +84,10 @@ module.exports = (callback) => {
           event.key = reference.key;
           return event;
         });
+    },
+    getEvent: (key) => {
+      return getEvent(key)
+        .then((snapshot) => snapshot.val());
     }
   });
 }
