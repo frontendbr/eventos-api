@@ -56,7 +56,7 @@ module.exports = ({ config, db }) => {
             db
                 .listAdmins()
                 .then((admins) => {
-                    
+                    console.log(admins);
                     if (admins.indexOf(user.email) > -1) {
                         req.authentication = { user: user };
                         next();
