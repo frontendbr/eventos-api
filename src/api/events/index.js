@@ -70,7 +70,7 @@ module.exports = ({ config, db, loginManager }) => {
                 })
         });    
 
-        route.delete('/event/:eventId',
+    route.delete('/event/:eventId',
         loginManager.admin,
         (req, res, next) => {
             const eventId = req.params.eventId;
