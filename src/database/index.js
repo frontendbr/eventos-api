@@ -44,13 +44,12 @@ module.exports = (callback) => {
       return firebase
         .database()
         .ref('admins')
-        .once('value', (snapshot) => {
+        .once('value').then((snapshot) => {
           const admins = adminProcessor.process({
             snapshot
           });
           return admins;
         });
-
     },
 
     addAdmin: ({
@@ -88,6 +87,12 @@ module.exports = (callback) => {
     getEvent: (key) => {
       return getEvent(key)
         .then((snapshot) => snapshot.val());
+    },
+    deleteEvent: (key) => {
+      return firebase
+      .database()
+      .ref('/events/' + key)
+      .remove();
     }
   });
 }

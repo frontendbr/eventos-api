@@ -7,7 +7,7 @@ Esse projeto tem como intuito criar uma API capaz de fornecer os dados para os e
 
 ### Draft
 O desenho da API está sendo feito no [Swagger](https://swagger.io).
-Para visualizar, você pode acessar a [documentação](https://frontendbr-eventos.now.sh/api/docs/) (Em manutenção)
+Para visualizar, você pode acessar a [documentação](https://frontendbreventosapi-eventosapi.wedeploy.io/api/docs/) (Em atualização)
 
 Com isso é possível visualizar o atual draft, qualquer sugestão pode ser feita pelas issues.
 
@@ -22,5 +22,13 @@ Para rodar o projeto, atualmente é necessário adicionar o arquivo `firebase-ad
 Você pode, se desejar, configurar uma aplicação do github através do arquivo `default.json`, a aplicação atual aponta para o callback `http://localhost:3000/auth/github/callback`.
 
 Para rodar, basta executar `npm i` na raiz, em seguida `npm start`.
+
+## Deploy
+
+A plataforma de Deploy escolhida, foi o [WeDeploy](https://wedeploy.com/).
+
+Para realizar o deploy, é necessário ter instalado o CLI do WeDeploy e alterar o arquivo `wedeploy.json` colocando as variáveis do Admin do Firebase. Sem isso a aplicação não ira funcionar corretamente.
+
+Futuramente irei configurar para que o Deploy seja feito pelo próprio TravisCI após o Build da master.
 
 Dúvidas? Sinta-se a vontade para abrir uma issue.

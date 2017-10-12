@@ -1,0 +1,9 @@
+{
+    "id": "eventosapi",
+    "env": {
+        "FIREBASE_ADMIN_LOAD_TYPE": "",
+        "FIREBASE_ADMIN_PROJECT_ID": "",
+        "FIREBASE_ADMIN_CLIENT_EMAIL": "",
+        "FIREBASE_ADMIN_PRIVATE_KEY": ""
+    }
+}

@@ -56,6 +56,10 @@ class Router {
     this.capture.push(arguments);
   }
 
+  delete(){
+    if (!this.capture) this.capture = [];
+    this.capture.push(arguments);
+  }
   captur(){
     return this.capture;
   }

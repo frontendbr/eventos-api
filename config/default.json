@@ -1,5 +1,5 @@
 {
-  "port": "3000",
+  "port": "80",
   "secret": "secret",
   "github": {
     "clienteId": "93c87ec9bfbea4151180",
