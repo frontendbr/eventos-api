@@ -1,5 +1,5 @@
 {
-    "id": "eventosapi",
+    "id": "frontendbreventosapi",
     "env": {
         "FIREBASE_ADMIN_LOAD_TYPE": "",
         "FIREBASE_ADMIN_PROJECT_ID": "",

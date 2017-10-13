@@ -29,6 +29,8 @@ A plataforma de Deploy escolhida, foi o [WeDeploy](https://wedeploy.com/).
 
 Para realizar o deploy, é necessário ter instalado o CLI do WeDeploy e alterar o arquivo `wedeploy.json` colocando as variáveis do Admin do Firebase. Sem isso a aplicação não ira funcionar corretamente.
 
+Faça deploy através do comando `we deploy -p eventosapi`, onde eventosapi é o nome do projeto.
+
 Futuramente irei configurar para que o Deploy seja feito pelo próprio TravisCI após o Build da master.
 
 Dúvidas? Sinta-se a vontade para abrir uma issue.
