@@ -1,8 +1,18 @@
 {
   "port": "3000",
+  "serviceAccountAdminPath": "./firebase-admin-sdk-dev.json",
+  "databaseURL": "https://frontend-br-eventos-dev.firebaseio.com/",  
+   "firebase": {
+    "apiKey": "AIzaSyAH12r5RbxzHZA30ZLc-nAMqlEXLmYxzVE",
+    "authDomain": "frontend-br-eventos-dev.firebaseapp.com",
+    "databaseURL": "https://frontend-br-eventos-dev.firebaseio.com",
+    "projectId": "frontend-br-eventos-dev",
+    "storageBucket": "",
+    "messagingSenderId": "90026726723"
+  },
   "github": {
     "clienteId": "7ce460021a69ec7f56b7",
     "clienteSecret": "d58c251c95c9ce057c9532aacb0fb2f33e0412f8",
     "callbackURL": "http://localhost:3000/auth/github/callback"
-  },
+  }
 }

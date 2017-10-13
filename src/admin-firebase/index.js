@@ -1,7 +1,7 @@
 var admin = require("firebase-admin");
 
 module.exports = ({ config }) => {
-  const databaseURL = "https://frontend-br-eventos.firebaseio.com";
+  const databaseURL = config.databaseURL;
 
   const FIREBASE_ADMIN_LOAD_TYPE = process.env.FIREBASE_ADMIN_LOAD_TYPE;
   const FIREBASE_ADMIN_PROJECT_ID = process.env.FIREBASE_ADMIN_PROJECT_ID;

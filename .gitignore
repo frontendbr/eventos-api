@@ -60,4 +60,4 @@ typings/
 
 # firebase
 frontend-br-eventos-firebase-adminsdk-cwau8-feba252aa4.json
-firebase-admin-sdk.json
+firebase-admin-*

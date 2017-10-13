@@ -7,6 +7,7 @@
     "callbackURL": "https://frontendbreventosapi-eventosapi.wedeploy.io/auth/github/callback"
   },
   "serviceAccountAdminPath": "./firebase-admin-sdk.json",
+  "databaseURL": "https://frontend-br-eventos.firebaseio.com",
   "firebase": {
     "apiKey": "AIzaSyDClNYE54DCbk5y91sf-_MCYLIfkto6zwk",
     "authDomain": "frontend-br-eventos.firebaseapp.com",

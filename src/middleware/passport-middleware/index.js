@@ -87,14 +87,20 @@ module.exports = ({ config, db }) => {
   //   login page.  Otherwise, the primary route function will be called,
   //   which, in this example, will redirect the user to the home page.
   routes.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/login' }),
+    passport.authenticate('github', { failureRedirect: '/home' }),
     (req, res) => {
 
       firebase
       .auth()
-        .signInWithCredential(req.user.credential).catch((error) => {
+        .signInWithCredential(req.user.credential)
+        .then((user)=>{
+          res.redirect('http://localhost:8080/login?accessToken='+ req.user.accessToken);  
+        })
+        .catch((error) => {
+          console.log(error);
+          res.redirect('/home?accessToken='+ req.user.accessToken);  
       });
-        res.redirect('/home');
+        
     });
 
 
@@ -105,10 +111,18 @@ module.exports = ({ config, db }) => {
 
         firebase
         .auth()
-          .signInWithCredential(credential).catch((error) => {
+          .signInWithCredential(credential)
+          .then((user) => {
+            console.log(user);
+            res.user = user;
+            res.redirect('/home');  
+          })
+          .catch((error) => {
+            console.error(error);
+            res.redirect('/home');
         });
         
-          res.redirect('/home');
+          
       });
 
 
