@@ -7,7 +7,8 @@
     "test": "mocha --timeout 10000 --recursive --reporter list",
     "testd": "mocha --debug-brk --timeout 10000 --recursive",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "start": "node src",
+    "start": "NODE_ENV=prod node src",
+    "dev": "NODE_ENV=dev node src",
     "debug": "DEBUG=* node src"
   },
   "repository": {

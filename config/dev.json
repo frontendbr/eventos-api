@@ -1,3 +1,8 @@
 {
-  "port": "3000"
+  "port": "3000",
+  "github": {
+    "clienteId": "7ce460021a69ec7f56b7",
+    "clienteSecret": "d58c251c95c9ce057c9532aacb0fb2f33e0412f8",
+    "callbackURL": "http://localhost:3000/auth/github/callback"
+  },
 }
