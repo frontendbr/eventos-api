@@ -1,8 +1,8 @@
 module.exports = ({ app, db }) => {
-  app.use(( req, res, next ) => {
-    db.signOut().then(function() {
+  app.use(( req, res ) => {
+    db.signOut().then(() => {
       console.log('Signed Out');
-    }, function(error) {
+    }).catch((error) => {
       console.error('Sign Out Error', error);
     });
   });

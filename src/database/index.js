@@ -93,6 +93,26 @@ module.exports = (callback) => {
       .database()
       .ref('/events/' + key)
       .remove();
+    },
+    menu: ({ isAdmin }) => {
+      //por uma questão de simplicidade, optei por não colocar o menu no firebase.
+      const menus = [];
+
+      menus.push({
+        id: 'cadastro-evento',
+        label: 'Cadastro de eventos',
+        url: 'cadastro'
+      });
+
+      if(isAdmin){
+        menus.push({
+          id: 'painel-admin',
+          label: 'Dashboard Administrativo',
+          url: 'dashboard'
+        });
+      }
+
+      return Promise.resolve(menus);
     }
   });
 }

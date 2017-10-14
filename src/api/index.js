@@ -4,6 +4,7 @@ const loginMiddleware = require('../middleware/login-request-middleware');
 const Docs = require('./docs');
 const Events = require('./events');
 const Admin = require('./admin');
+const Menu = require('./menu');
 
 module.exports = ({ config, db }) => {
 	console.info('Init API module');
@@ -15,6 +16,7 @@ module.exports = ({ config, db }) => {
 	api.use(Docs({ config, db }));
 	api.use(Events({ config, db, loginManager }));
 	api.use(Admin({ config, db, loginManager }));
+	api.use(Menu({ config, db, loginManager }));
 
 	api.get('/', (req, res, next) => {
 		res.json({ version });

@@ -44,6 +44,17 @@ module.exports = ({ config, db }) => {
         process(accessToken, resolve, reject);
     }
 
+    const isAdmin = ( user ) => db
+                .listAdmins()
+                .then((admins) => {
+                    if (admins.indexOf(user.email) > -1) {
+                        return user;
+                    } else {
+                        return Promise.reject('User not admin');
+                    }
+                });
+
+
     const admin = (req, res, next) => {
         const accessToken = req.get('Authorization');
         const reject = (error) => {
@@ -53,21 +64,15 @@ module.exports = ({ config, db }) => {
         }
 
         const resolve = (user) => {
-            db
-                .listAdmins()
-                .then((admins) => {
-                    console.log(admins);
-                    if (admins.indexOf(user.email) > -1) {
-                        req.authentication = { user: user };
-                        next();
-                    } else {
-                        console.log('reject!')
-                        reject({
+                isAdmin(user)
+                .then(() => {
+                    req.authentication = { user: user };
+                    next();
+                })
+                .catch(() => reject({
                             status: 401,
                             message: "is necessary been admin"
-                        })
-                    }
-                })
+                        }));
 
 
         }
@@ -77,6 +82,7 @@ module.exports = ({ config, db }) => {
 
     return {
         authentication,
-        admin
+        admin,
+        isAdmin
     }
 }
