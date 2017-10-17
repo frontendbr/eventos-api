@@ -1,34 +1,20 @@
-const http = require('http');
-const express = require('express');
-const morgan = require('morgan');
-const middleware = require('./middleware');
-const initializeDb = require('./database');
-const api = require('./api');
-const config = require('config');
-const views = require('./views');
-const signout = require('./middleware/signout-middleware');
-const errorHandler = require('./middleware/error-handler-middleware');
-
-const app = express();
-app.server = http.createServer(app);
-
-app.use(morgan('dev'));
+const app = require('./app'),
+	middleware = require('./middleware'),
+	initializeDb = require('./database'),
+	api = require('./api'),
+	config = require('config'),
+	views = require('./views'),
+	signout = require('./middleware/signout-middleware'),
+	errorHandler = require('./middleware/error-handler-middleware');
 
 initializeDb(db => {
 
-	app.use(middleware({ config, db, app }));
-
-	views({ config, db, app });
-
-	app.use('/api', api({ config, db }));
-
 	signout({ app, db });
-
+	views({ config, db, app });
 	errorHandler({ app, db });
 
-	app.server.listen(process.env.PORT || config.port, () => {
-		console.log(`Started on port ${app.server.address().port}`);
-	});
-});
+	app.use(middleware({ config, db, app }));
+	app.use('/api', api({ config, db }));
 
-module.exports = app;
+	app.listen(app.get('PORT'), () => console.log(`Started on port ${app.get('PORT')}`));
+});
