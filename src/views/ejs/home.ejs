@@ -1,9 +1,11 @@
 <% if (!user) { %>
 	<h2>Welcome! Please log in.</h2>
-<% } else { %>
-	<h2>Hello, <%= user.displayName %>.</h2>
-	<script>
-		var token = '<%= user.accessToken %>';
-		console.log(token);
-	</script>
-<% } %>
+	<% } else { %>
+		<h2>Hello,
+			<%= user.displayName %>.</h2>
+		<script>
+			var token = '<%= user.accessToken %>';
+			console.log(token);
+
+		</script>
+		<% } %>
