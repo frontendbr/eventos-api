@@ -1,7 +1,7 @@
 # frontendbr-eventos-api
 
-Develop: [![Build Status](https://travis-ci.org/angeliski/frontendbr-eventos-api.svg?branch=master)](https://travis-ci.org/angeliski/frontendbr-eventos-api)
-[![Coverage Status](https://coveralls.io/repos/github/angeliski/frontendbr-eventos-api/badge.svg?branch=master)](https://coveralls.io/github/angeliski/frontendbr-eventos-api?branch=develop)
+Develop: [![Build Status](https://travis-ci.org/frontendbr/eventos-api.svg?branch=master)](https://travis-ci.org/frontendbr/eventos-api)
+[![Coverage Status](https://coveralls.io/repos/github/frontendbr/eventos-api/badge.svg?branch=master)](https://coveralls.io/github/frontendbr/eventos-api?branch=master)
 
 Esse projeto tem como intuito criar uma API capaz de fornecer os dados para os eventos do [frontendbr](frontendbr.com.br/eventos).
 
