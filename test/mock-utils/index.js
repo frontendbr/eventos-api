@@ -1,58 +1,77 @@
 const proxyquireStrict = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 const firebasemock = require('firebase-mock');
-const { assert } = require('chai');
+const {
+	assert
+} = require('chai');
 
-const database = sinon.spy((callback) => {
-  assert.isNotNull(callback);
-  assert.isFunction(callback);
-  callback({});
+const database = sinon.spy((next) => {
+	assert.isNotNull(next);
+	assert.isFunction(next);
+	next({});
 });
 
 const express = require('./express');
 
 const http = {
-  createServer: () => { }
+	createServer: () => {}
 };
 
 var mockdatabase = new firebasemock.MockFirebase();
 var mockauth = new firebasemock.MockFirebase();
 var firebase = firebasemock.MockFirebaseSdk(function (path) {
-  return mockdatabase.child(path);
+	return mockdatabase.child(path);
 }, function () {
-  return mockauth;
+	return mockauth;
 });
 
-
-sinon.stub(firebase, 'initializeApp').returns(() => { });
+sinon.stub(firebase, 'initializeApp').returns(() => {});
 sinon.stub(firebase, 'database')
-  .returns({ ref: () => { return { push: () => {return new Promise((resolve, reject) => { resolve({}) }) } } } });
+	.returns({
+		ref: () => {
+			return {
+				push: () => {
+					return new Promise((resolve, reject) => {
+						resolve({});
+					});
+				}
+			};
+		}
+	});
 sinon.stub(firebase, 'auth')
-  .returns({ signOut: () => { }, signInWithCredential: () => { } });
+	.returns({
+		signOut: () => {},
+		signInWithCredential: () => {}
+	});
 
-const firebaseAdmin = { initializeApp: () => { }, credential: { cert: () => { } } };
+const firebaseAdmin = {
+	initializeApp: () => {},
+	credential: {
+		cert: () => {}
+	}
+};
 
 sinon.stub(firebaseAdmin, 'initializeApp');
 
 const ht = sinon.stub(http, 'createServer');
 
 ht.returns({
-  listen: (port, callback) => {
-    callback();
-  },
-  address: () => {
-    return {
-      port: 8080
-    }
-  }
+	listen: (port, next) => {
+		next();
+	},
+	address: () => {
+		return {
+			port: 8080
+		};
+	}
 });
 
-const middleware = sinon.spy(() => { });
-const defaultMiddleware = sinon.spy(() => { });
-const passportMiddleware = sinon.spy(() => { });
-const signout = sinon.spy(() => { });
-const views = sinon.spy(() => { });
-const api = sinon.spy(() => { });
+const middleware = sinon.spy(() => {});
+const defaultMiddleware = sinon.spy(() => {});
+const passportMiddleware = sinon.spy(() => {});
+const signout = sinon.spy(() => {});
+const views = sinon.spy(() => {});
+const api = sinon.spy(() => {});
 
 const store = {};
 store['http'] = http;
@@ -67,20 +86,19 @@ store['./passport-middleware'] = passportMiddleware;
 store['firebase'] = firebase;
 store['firebase-admin'] = firebaseAdmin;
 
-
-function init(pathModule, modules) {
-  const initialize = {};
-  for (let i = 0; i < modules.length; i++) {
-    initialize[modules[i]] = store[modules[i]];
-  }
-  return proxyquireStrict(pathModule, initialize);
+function init (pathModule, modules) {
+	const initialize = {};
+	for (let i = 0; i < modules.length; i++) {
+		initialize[modules[i]] = store[modules[i]];
+	}
+	return proxyquireStrict(pathModule, initialize);
 }
 
-function getModule(moduleName) {
-  return store[moduleName];
+function getModule (moduleName) {
+	return store[moduleName];
 }
 
 module.exports = {
-  init,
-  getModule
-}
+	init,
+	getModule
+};

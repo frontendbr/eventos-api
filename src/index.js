@@ -15,16 +15,32 @@ app.server = http.createServer(app);
 app.use(morgan('dev'));
 
 initializeDb(db => {
+	app.use(middleware({
+		config,
+		db,
+		app
+	}));
 
-	app.use(middleware({ config, db, app }));
+	views({
+		config,
+		db,
+		app
+	});
 
-	views({ config, db, app });
+	app.use('/api', api({
+		config,
+		db
+	}));
 
-	app.use('/api', api({ config, db }));
+	signout({
+		app,
+		db
+	});
 
-	signout({ app, db });
-
-	errorHandler({ app, db });
+	errorHandler({
+		app,
+		db
+	});
 
 	app.server.listen(process.env.PORT || config.port, () => {
 		console.log(`Started on port ${app.server.address().port}`);

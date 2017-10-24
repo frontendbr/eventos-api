@@ -1,85 +1,95 @@
-process.env.NODE_ENV = 'test';
-
-const sinon = require("sinon");
+const sinon = require('sinon');
 const chai = require('chai');
-const sinonChai = require("sinon-chai");
-const should = chai.should();
+const sinonChai = require('sinon-chai');
+const path = require('path');
 const assert = chai.assert;
 const mocks = require('../mock-utils');
 
+chai.should();
 chai.use(sinonChai);
 
 describe('Signout', () => {
-    describe('init', () => {
-        let app;
-        it('correct', () => {
-            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
+	describe('init', () => {
+		let app;
+		it('correct', () => {
+			const signOut = mocks.init(path.join(__dirname, '/../../src/middleware/signout-middleware'), []);
 
-            app = mocks.getModule('express')();
-            const useApp = sinon.stub(app, 'use');
+			app = mocks.getModule('express')();
+			const useApp = sinon.stub(app, 'use');
 
-            const db = mocks.getModule('./database');
-            const dbSignout = sinon.stub(db, 'signOut');
+			const db = mocks.getModule('./database');
+			sinon.stub(db, 'signOut');
 
-            assert.isNotNull(signOut({ app, db }));
-            useApp.should.have.been.called;
-            db.should.have.been.called;
-        });
+			assert.isNotNull(signOut({
+				app,
+				db
+			}));
+			useApp.should.have.been.called;
+			db.should.have.been.called;
+		});
 
-        after(function () {
-            app.use.restore(); // Unwraps the spy
-        });
-    });
+		after(function () {
+			app.use.restore(); // Unwraps the spy
+		});
+	});
 
-    describe('should call signOut', function () {
-        it('return ok', function () {
-            const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
-            let middleware;
+	describe('should call signOut', function () {
+		let middleware;
 
-            const app = {
-                use: function (callback) {
-                    middleware = callback;
-                }
-            }
+		it('return ok', function () {
+			const signOut = mocks.init(path.join(__dirname, '/../../src/middleware/signout-middleware'), []);
+			const app = {
+				use: function (next) {
+					middleware = next;
+				}
+			};
 
-            const db = {
-                signOut: () => { }
-            };
-            const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject) => { resolve() }));
+			const db = {
+				signOut: () => {}
+			};
+			const dbSignout = sinon.stub(db, 'signOut').returns(new Promise((resolve, reject) => {
+				resolve();
+			}));
 
-            signOut({ app, db });
+			signOut({
+				app,
+				db
+			});
 
-            //simulando a chamada do middleware
-            middleware();
+			// simulando a chamada do middleware
+			middleware();
 
-            dbSignout.should.have.been.called;
-        }),
+			dbSignout.should.have.been.called;
+		});
 
-            it('return error', function () {
-                const signOut = mocks.init(__dirname + '/../../src/middleware/signout-middleware', []);
-                let callback;
+		it('return error', function () {
+			const signOut = mocks.init(path.join(__dirname, '/../../src/middleware/signout-middleware'), []);
 
-                const app = {
-                    use: function (callback) {
-                        middleware = callback;
-                    }
-                }
+			const app = {
+				use: function (next) {
+					middleware = next;
+				}
+			};
 
-                const db = {
-                    signOut: () => { }
-                };
-                const dbSignout = sinon.stub(db, 'signOut')
-                    .returns(new Promise((resolve, reject) => { reject({ error: 'error' }) }));
+			const db = {
+				signOut: () => {}
+			};
+			const dbSignout = sinon.stub(db, 'signOut')
+				.returns(new Promise((resolve, reject) => {
+					reject(new Error({
+						error: 'error'
+					}));
+				}));
 
-                signOut({ app, db });
+			signOut({
+				app,
+				db
+			});
 
-                //simulando a chamada do middleware
-                middleware();
+			// simulando a chamada do middleware
+			middleware();
 
-                dbSignout.should.have.been.called;
-            })
-
-
-
-    })
+			dbSignout.should.have.been.called;
+		});
+	});
 });

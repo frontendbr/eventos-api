@@ -1,13 +1,17 @@
-const { Router } = require('express');
+const path = require('path');
 
-module.exports = ({ config, db, app }) => {
+module.exports = ({
+	config,
+	db,
+	app
+}) => {
+	app.set('views', path.join(__dirname, '/ejs'));
+	app.set('view engine', 'ejs');
 
-  app.set('views', __dirname + '/ejs');
-  app.set('view engine', 'ejs');
-
-  app.get('/home',(req, res, next) => {
-			res.render('home', { user: req.user });
-      next();
+	app.get('/home', (req, res, next) => {
+		res.render('home', {
+			user: req.user
+		});
+		next();
 	});
-
-}
+};
