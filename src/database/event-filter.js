@@ -1,39 +1,39 @@
 const filterTitle = ({
-	title,
-	keywords
+  title,
+  keywords
 }) => {
-	return keywords ? (title.toLowerCase().indexOf(keywords.toLowerCase()) > -1) : true;
-};
+  return keywords ? (title.toLowerCase().indexOf(keywords.toLowerCase()) > -1) : true
+}
 
 const filterMonth = ({
-	date,
-	month
+  date,
+  month
 }) => {
-	return month ? date.month.toLowerCase() === month.toLowerCase() : true;
-};
+  return month ? date.month.toLowerCase() === month.toLowerCase() : true
+}
 
 const filterState = ({
-	location,
-	acronym
+  location,
+  acronym
 }) => {
-	return acronym ? location.state.toLowerCase() === acronym.toLowerCase() : true;
-};
+  return acronym ? location.state.toLowerCase() === acronym.toLowerCase() : true
+}
 
 module.exports =
-	({
-		event,
-		month,
-		state,
-		keywords
-	}) => filterTitle({
-		title: event.title,
-		keywords
-	}) &&
-	filterMonth({
-		date: event.date,
-		month
-	}) &&
-	filterState({
-		location: event.location,
-		acronym: state
-	});
+  ({
+    event,
+    month,
+    state,
+    keywords
+  }) => filterTitle({
+    title: event.title,
+    keywords
+  }) &&
+    filterMonth({
+      date: event.date,
+      month
+    }) &&
+    filterState({
+      location: event.location,
+      acronym: state
+    })

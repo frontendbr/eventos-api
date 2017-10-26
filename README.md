@@ -1,6 +1,7 @@
 # frontendbr-eventos-api
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
-Develop: [![Build Status](https://travis-ci.org/frontendbr/eventos-api.svg?branch=master)](https://travis-ci.org/frontendbr/eventos-api)
+Master: [![Build Status](https://travis-ci.org/frontendbr/eventos-api.svg?branch=master)](https://travis-ci.org/frontendbr/eventos-api)
 [![Coverage Status](https://coveralls.io/repos/github/frontendbr/eventos-api/badge.svg?branch=master)](https://coveralls.io/github/frontendbr/eventos-api?branch=master)
 
 Esse projeto tem como intuito criar uma API capaz de fornecer os dados para os eventos do [frontendbr](frontendbr.com.br/eventos).
@@ -14,7 +15,7 @@ Com isso é possível visualizar o atual draft, qualquer sugestão pode ser feit
 ## Run
 As seguintes tecnologias são usadas nesse projeto:
  - Firebase
- - Node 
+ - Node
  - Express 4
  - ES6
 

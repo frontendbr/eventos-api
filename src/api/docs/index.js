@@ -1,16 +1,16 @@
 const {
-	Router
-} = require('express');
-const swaggerDocument = require('./swagger.json');
-const swaggerUi = require('swagger-ui-express');
+  Router
+} = require('express')
+const swaggerDocument = require('./swagger.json')
+const swaggerUi = require('swagger-ui-express')
 
 module.exports = ({
-	config,
-	db
+  config,
+  db
 }) => {
-	console.info('Init DOCS API module');
-	const app = Router();
-	app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  console.info('Init DOCS API module')
+  const app = Router()
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-	return app;
-};
+  return app
+}
