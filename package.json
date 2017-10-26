@@ -8,7 +8,7 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "start": "cross-env NODE_ENV=prod node src",
     "dev": "cross-env NODE_ENV=dev node src",
-		"eslint": "eslint --ext .js src test"
+    "eslint": "eslint --ext .js src test"
   },
   "repository": {
     "type": "git",
@@ -44,11 +44,8 @@
     "coveralls": "^2.13.1",
     "cross-env": "^5.1.0",
     "eslint": "^4.9.0",
-    "eslint-config-standard": "^10.2.1",
+    "standard": "^10.0.3",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
     "firebase-mock": "^1.1.5",
     "istanbul": "^0.4.5",
     "mocha": "^2.4.5",
