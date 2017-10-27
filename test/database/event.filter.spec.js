@@ -1,5 +1,5 @@
-const chai = require('chai')
-const sinonChai = require('sinon-chai')
+import chai from 'chai'
+import sinonChai from 'sinon-chai'
 
 chai.should()
 chai.use(sinonChai)

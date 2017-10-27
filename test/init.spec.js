@@ -1,14 +1,15 @@
-const chai = require('chai')
-const assert = chai.assert
-const mocks = require('./mock-utils')
-const path = require('path')
+import 'babel-polyfill'
+import chai, { assert } from 'chai'
+import mocks from './mock-utils'
+import path from 'path'
 
 chai.should()
 
 describe('App', () => {
   describe('init', () => {
     it('correct', () => {
-      const app = mocks.init(path.join(__dirname, '/../src'), ['express',
+      const app = mocks.init(path.join(__dirname, '/../src'), [
+        'express',
         'http',
         './database',
         './middleware',

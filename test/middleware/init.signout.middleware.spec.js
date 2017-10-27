@@ -1,10 +1,10 @@
-const sinon = require('sinon')
-const chai = require('chai')
-const sinonChai = require('sinon-chai')
-const path = require('path')
-const assert = chai.assert
-const mocks = require('../mock-utils')
+import sinon from 'sinon'
+import chai from 'chai'
+import sinonChai from 'sinon-chai'
+import path from 'path'
+import mocks from '../mock-utils'
 
+const assert = chai.assert
 chai.should()
 chai.use(sinonChai)
 

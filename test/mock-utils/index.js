@@ -1,23 +1,23 @@
-const proxyquireStrict = require('proxyquire').noCallThru()
-const sinon = require('sinon')
-const firebasemock = require('firebase-mock')
-const { assert } = require('chai')
+import express from './express'
+import sinon from 'sinon'
+import firebasemock from 'firebase-mock'
+import { assert } from 'chai'
+import { noCallThru } from 'proxyquire'
 
+const proxyquireStrict = noCallThru()
 const database = sinon.spy((next) => {
   assert.isNotNull(next)
   assert.isFunction(next)
   next({})
 })
 
-const express = require('./express')
-
 const http = {
   createServer: () => { }
 }
 
-var mockdatabase = new firebasemock.MockFirebase()
-var mockauth = new firebasemock.MockFirebase()
-var firebase = firebasemock.MockFirebaseSdk(function (path) {
+let mockdatabase = new firebasemock.MockFirebase()
+let mockauth = new firebasemock.MockFirebase()
+let firebase = firebasemock.MockFirebaseSdk(function (path) {
   return mockdatabase.child(path)
 }, function () {
   return mockauth
