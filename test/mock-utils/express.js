@@ -25,8 +25,9 @@ exports.captures = () => {
 }
 
 const _capture = () => {
-  if (!this.capture) this.capture = []
-  this.capture.push(arguments)
+  // if (!this.capture) this.capture = []
+  let capture = []
+  capture.push(arguments)
 }
 
 class Router {

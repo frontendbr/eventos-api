@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --timeout 10000 --recursive --reporter list",
+    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --timeout 10000 --recursive --reporter list",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "start": "cross-env NODE_ENV=prod node src",
-    "dev": "cross-env NODE_ENV=dev nodemon src",
+    "start": "cross-env NODE_ENV=prod ./node_modules/.bin/babel-node src",
+    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/babel-node src",
     "eslint": "eslint --ext .js src test"
   },
   "repository": {
@@ -39,6 +39,9 @@
     "swagger-ui-express": "^2.0.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-polyfill": "^6.26.0",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "coveralls": "^2.13.1",

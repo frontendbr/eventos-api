@@ -3,7 +3,7 @@ node_js:
 - 6.11.0
 script:
 - npm run eslint
-- mocha --timeout 10000 --recursive --reporter list
+- npm test
 before_script:
 - npm install
 after_success:

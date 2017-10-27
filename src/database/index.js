@@ -1,8 +1,8 @@
-const firebase = require('firebase')
-const config = require('config')
-const _ = require('lodash')
-const eventProcessor = require('./event-processor')
-const adminProcessor = require('./admin-processor')
+import firebase from 'firebase'
+import config from 'config'
+import _ from 'lodash'
+import eventProcessor from './event-processor'
+import adminProcessor from './admin-processor'
 
 const getEvent = (key) => {
   return firebase

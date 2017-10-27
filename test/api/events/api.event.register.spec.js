@@ -1,7 +1,7 @@
-const sinon = require('sinon')
-const chai = require('chai')
-const sinonChai = require('sinon-chai')
-const mocks = require('../../mock-utils')
+import sinon from 'sinon'
+import chai from 'chai'
+import sinonChai from 'sinon-chai'
+import mocks from '../../mock-utils'
 
 chai.should()
 chai.use(sinonChai)

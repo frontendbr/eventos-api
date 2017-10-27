@@ -1,14 +1,10 @@
-const {
-  version
-} = require('../../package.json')
-const {
-  Router
-} = require('express')
-const loginMiddleware = require('../middleware/login-request-middleware')
-const Docs = require('./docs')
-const Events = require('./events')
-const Admin = require('./admin')
-const Menu = require('./menu')
+import { version } from '../../package.json'
+import { Router } from 'express'
+import loginMiddleware from '../middleware/login-request-middleware'
+import Docs from './docs'
+import Events from './events'
+import Admin from './admin'
+import Menu from './menu'
 
 module.exports = ({
   config,

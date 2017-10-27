@@ -1,8 +1,6 @@
-const {
-  Router
-} = require('express')
-const swaggerDocument = require('./swagger.json')
-const swaggerUi = require('swagger-ui-express')
+import { Router } from 'express'
+import swaggerDocument from './swagger.json'
+import swaggerUi from 'swagger-ui-express'
 
 module.exports = ({
   config,

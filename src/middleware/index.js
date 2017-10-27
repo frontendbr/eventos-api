@@ -1,8 +1,6 @@
-const {
-  Router
-} = require('express')
-const defaultMiddleware = require('./default-middleware-application')
-const passportMiddleware = require('./passport-middleware')
+import { Router } from 'express'
+import defaultMiddleware from './default-middleware-application'
+import passportMiddleware from './passport-middleware'
 
 module.exports = ({
   config,
