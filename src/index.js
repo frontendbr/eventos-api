@@ -1,13 +1,13 @@
-const http = require('http')
-const express = require('express')
-const morgan = require('morgan')
-const middleware = require('./middleware')
-const initializeDb = require('./database')
-const api = require('./api')
-const config = require('config')
-const views = require('./views')
-const signout = require('./middleware/signout-middleware')
-const errorHandler = require('./middleware/error-handler-middleware')
+import http from 'http'
+import express from 'express'
+import morgan from 'morgan'
+import middleware from './middleware'
+import initializeDb from './database'
+import api from './api'
+import config from 'config'
+import views from './views'
+import signout from './middleware/signout-middleware'
+import errorHandler from './middleware/error-handler-middleware'
 
 const app = express()
 app.server = http.createServer(app)

@@ -1,4 +1,4 @@
-const joi = require('joi')
+import joi from 'joi'
 
 const dateEvent = joi.object().keys({
   day: joi.string(),

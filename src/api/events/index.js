@@ -1,9 +1,7 @@
-const {
-  Router
-} = require('express')
-const validate = require('express-validation')
-const validations = require('./validation.js')
-const eventFactory = require('./event-factory')
+import { Router } from 'express'
+import validate from 'express-validation'
+import validations from './validation'
+import eventFactory from './event-factory'
 
 module.exports = ({
   config,

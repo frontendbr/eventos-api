@@ -1,4 +1,4 @@
-const eventFilter = require('./event-filter')
+import eventFilter from './event-filter'
 
 const eventMatchFilter = ({
   event,

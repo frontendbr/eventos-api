@@ -1,6 +1,4 @@
-const {
-  Router
-} = require('express')
+import { Router } from 'express'
 
 module.exports = ({
   config,
