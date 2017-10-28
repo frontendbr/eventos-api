@@ -1,5 +1,5 @@
 {
-  "name": "frontendbr-eventos-api",
+  "name": "eventos-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angeliski/frontendbr-eventos-api.git"
+    "url": "git+https://github.com/frontendbr/eventos-api.git"
   },
   "author": "angeliski@hotmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angeliski/frontendbr-eventos-api/issues"
+    "url": "https://github.com/frontendbr/eventos-api/issues"
   },
-  "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
+  "homepage": "https://github.com/frontendbr/eventos-api#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "config": "^1.26.1",
