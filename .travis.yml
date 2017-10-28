@@ -4,7 +4,9 @@ node_js:
 script:
 - npm run eslint
 - npm test
+- npm run coverage
 before_script:
 - npm install
-after_success:
-- npm run coveralls
+cache:
+  directories:
+    - node_modules

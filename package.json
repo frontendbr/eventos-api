@@ -1,25 +1,34 @@
 {
-  "name": "frontendbr-eventos-api",
+  "name": "eventos-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --timeout 10000 --recursive --reporter list",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "pretest": "npm run eslint",
+    "test": "cross-env NODE_ENV=test npm-run-all mocha",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:test": "npm run mocha -- --watch",
+    "watch:lint": "onchange '**/*.js' -- npm run eslint",
+    "coverage": "cross-env NODE_ENV=test npm-run-all coverage:** ",
+    "coverage:cover": "cross-env NODE_ENV=test node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha --report lcovonly -- --recursive",
+    "coverage:coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "coverage:clean": "rm -rf ./coverage",
     "start": "cross-env NODE_ENV=prod ./node_modules/.bin/babel-node src",
-    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/babel-node src",
-    "eslint": "eslint --ext .js src test"
+    "dev": "cross-env NODE_ENV=dev nodemon ./node_modules/.bin/babel-node src",
+    "eslint": "eslint --cache --ext .js src test",
+    "eslint:fix": "eslint --cache --fix  --ext .js src test",
+    "mocha": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --timeout 10000 --recursive --reporter list"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angeliski/frontendbr-eventos-api.git"
+    "url": "git+https://github.com/frontendbr/eventos-api.git"
   },
   "author": "angeliski@hotmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angeliski/frontendbr-eventos-api/issues"
+    "url": "https://github.com/frontendbr/eventos-api/issues"
   },
-  "homepage": "https://github.com/angeliski/frontendbr-eventos-api#readme",
+  "homepage": "https://github.com/frontendbr/eventos-api#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "config": "^1.26.1",
@@ -40,8 +49,10 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-istanbul": "^0.12.2",
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "coveralls": "^2.13.1",
@@ -53,6 +64,7 @@
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.12.1",
+    "npm-run-all": "^4.1.1",
     "proxyquire": "^1.8.0",
     "sinon": "^2.3.8",
     "sinon-chai": "^2.12.0",
