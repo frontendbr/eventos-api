@@ -8,6 +8,13 @@
   },
   "serviceAccountAdminPath": "./firebase-admin-sdk.json",
   "databaseURL": "https://frontend-br-eventos.firebaseio.com",
+  "mongo": {
+    "host": "ds227555.mlab.com",
+    "port": 27555,
+    "database": "eventos-api",
+    "username": "admin",
+    "password": "javascript0"
+  },
   "firebase": {
     "apiKey": "AIzaSyDClNYE54DCbk5y91sf-_MCYLIfkto6zwk",
     "authDomain": "frontend-br-eventos.firebaseapp.com",

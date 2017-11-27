@@ -3,6 +3,7 @@ import config from 'config'
 import _ from 'lodash'
 import eventProcessor from './event-processor'
 import adminProcessor from './admin-processor'
+import connect from './mongo-connect'
 
 const getEvent = (key) => {
   return firebase
@@ -15,6 +16,9 @@ const getEvent = (key) => {
 module.exports = (next) => {
   console.info('Init Database module')
 
+  // mongo connect
+  connect()
+  // remover apos a transicao
   firebase.initializeApp(config.firebase)
 
   next({
