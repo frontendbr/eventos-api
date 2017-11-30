@@ -15,14 +15,21 @@ module.exports = ({
     db
   })
 
-  let api = Router()
+  const api = Router()
+  api.use('/admin', Admin({ config, db, loginManager }))
 
   api.use(Docs({
     config,
     db
   }))
-  api.use(Events(loginManager))
+
   api.use(Admin({
+    config,
+    db,
+    loginManager
+  }))
+
+  api.use(Events({
     config,
     db,
     loginManager

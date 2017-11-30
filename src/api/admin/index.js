@@ -1,31 +1,21 @@
 import { Router } from 'express'
+import { middleware as body } from 'bodymen'
 
-module.exports = ({
-  config,
-  db,
-  loginManager
-}) => {
+import { administratorSchema } from './model'
+import { create } from './controller'
+
+const { email } = administratorSchema.tree
+
+module.exports = ({ config, db, loginManager }) => {
   console.info('Init Admin module')
   const route = Router()
 
-  route.post('/admin',
+  route.post(
+    '/',
     loginManager.admin,
-    (req, res, next) => {
-      const admin = req.body
-      db.addAdmin(admin)
-        .then(() => {
-          res.json({})
-          next()
-        }).catch((error) => {
-          console.log(error)
-          res
-            .status(500)
-            .json({
-              error: 'Admin no registered, please try again'
-            })
-          next()
-        })
-    })
+    body({ email }),
+    create
+  )
 
   return route
 }
