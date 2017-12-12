@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/frontendbr/eventos-api#readme",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.17.2",
     "config": "^1.26.1",
     "cors": "^2.8.4",
@@ -42,6 +43,7 @@
     "firebase-admin": "^5.0.1",
     "joi": "^7.3.0",
     "lodash": "^4.17.4",
+    "mongoose": "^4.13.5",
     "morgan": "^1.8.0",
     "passport": "^0.3.2",
     "passport-github2": "^0.1.10",
