@@ -22,11 +22,7 @@ module.exports = ({
     config,
     db
   }))
-  api.use(Events({
-    config,
-    db,
-    loginManager
-  }))
+  api.use(Events(loginManager))
   api.use(Admin({
     config,
     db,
