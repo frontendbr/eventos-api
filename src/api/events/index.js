@@ -1,94 +1,15 @@
-import { Router } from 'express'
-import validate from 'express-validation'
-import validations from './validation'
-import eventFactory from './event-factory'
+import express from 'express'
+import { find, create, update, remove } from './controller'
 
-module.exports = ({
-  config,
-  db,
-  loginManager
-}) => {
-  console.info('Init Events module')
-  const route = Router()
+const router = (loginManager) => {
+  let route = express.Router()
 
-  route.post('/event',
-    validate(validations.createEvent),
-    loginManager.authentication,
-    (req, res, next) => {
-      const event = eventFactory.insert(req.body)
-
-      db.saveEvent(event).then((savedEvent) => {
-        res.json(savedEvent)
-        next()
-      }).catch((error) => {
-        console.log(error)
-
-        res.status(500).json({
-          error: 'Event no registered, please try again'
-        })
-        next()
-      })
-    })
-
-  route.get('/event',
-    (req, res, next) => {
-      db.listEvent({
-        filter: req.query
-      }).then((events) => {
-        res.json(events)
-        next()
-      })
-    })
-
-  route.put('/event/:eventId',
-    validate(validations.updateEvent),
-    loginManager.admin,
-    (req, res, next) => {
-      const eventId = req.params.eventId
-      const event = eventFactory.update(req.body)
-
-      db
-        .updateEvent(eventId, event)
-        .then(() => {
-          res.status(200).json({})
-          next()
-        })
-    })
-
-  route.get('/event/pending',
-    loginManager.authentication,
-    (req, res, next) => {
-      db.listEvent({
-        filter: req.query,
-        pending: true
-      }).then((events) => {
-        res.json(events)
-        next()
-      })
-    })
-
-  route.get('/event/:eventId',
-    (req, res, next) => {
-      const eventId = req.params.eventId
-      db
-        .getEvent(eventId)
-        .then((event) => {
-          res.json(event)
-          next()
-        })
-    })
-
-  route.delete('/event/:eventId',
-    loginManager.admin,
-    (req, res, next) => {
-      const eventId = req.params.eventId
-      db
-        .deleteEvent(eventId)
-        .then(() => {
-          res.status(200).json({})
-          next()
-        }).catch((err) => res.status(500).json(err))
-    })
+  route.get('/event/:id?', find)
+  route.post('/event', loginManager.authentication, create)
+  route.put('/event/:id', loginManager.admin, update)
+  route.delete('/event/:id', loginManager.admin, remove)
 
   return route
 }
+
+export default router
