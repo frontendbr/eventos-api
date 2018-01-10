@@ -1,8 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
-const administratorSchema = new Schema({
+const Administrator = new Schema({
   email: { type: String, required: true }
 })
 
-export default mongoose.model('Administrator', administratorSchema)
-export { administratorSchema }
+export default mongoose.model('Administrator', Administrator)

@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
-const Event = new mongoose.Schema({
+const Event = new Schema({
   title: {
     type: String,
     required: true
