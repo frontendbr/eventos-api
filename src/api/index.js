@@ -29,11 +29,7 @@ module.exports = ({
     loginManager
   }))
 
-  api.use(Events({
-    config,
-    db,
-    loginManager
-  }))
+  api.use(Events(loginManager))
 
   api.get('/', (req, res, next) => {
     res.json({
