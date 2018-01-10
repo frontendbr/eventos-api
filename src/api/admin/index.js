@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import { create } from './controller'
 
-const router = ({ config, db, loginManager }) => {
+const router = (loginManager) => {
   console.info('Init Admin module')
   const route = Router()
 

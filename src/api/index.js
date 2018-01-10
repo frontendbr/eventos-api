@@ -5,7 +5,7 @@ import Docs from './docs'
 import Events from './events'
 import Admin from './admin'
 
-module.exports = ({
+const router = ({
   config,
   db
 }) => {
@@ -16,7 +16,9 @@ module.exports = ({
   })
 
   const api = Router()
-  api.use('/admin', Admin({ config, db, loginManager }))
+
+  api.use('/admin', Admin(loginManager))
+  api.use('/event', Events(loginManager))
 
   api.use(Docs({
     config,
@@ -40,3 +42,5 @@ module.exports = ({
 
   return api
 }
+
+export default router
