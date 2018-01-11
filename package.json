@@ -11,7 +11,7 @@
     "watch:lint": "onchange '**/*.js' -- npm run eslint",
     "coverage": "cross-env NODE_ENV=test npm-run-all coverage:** ",
     "coverage:cover": "cross-env NODE_ENV=test nyc npm run mocha",
-    "coverage:coveralls": "npm run coverage:cover -- --reporter=text-lcov | coveralls",
+    "coverage:coveralls": "npm run coverage:cover && nyc report --reporter=text-lcov | coveralls",
     "coverage:clean": "rm -rf ./coverage",
     "start": "cross-env NODE_ENV=prod ./node_modules/.bin/babel-node src",
     "dev": "cross-env NODE_ENV=dev nodemon ./node_modules/.bin/babel-node src",

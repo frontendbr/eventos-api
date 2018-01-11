@@ -1,12 +1,8 @@
 language: node_js
 node_js:
 - 6.11.0
-script:
-- npm run eslint
-- npm test
-- npm run coverage
-before_script:
-- npm install
+after_success:
+  - npm run coverage:coveralls
 cache:
   directories:
-    - node_modules
+    "node_modules"
