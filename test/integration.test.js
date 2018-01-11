@@ -1,6 +1,8 @@
 import MongoInMemory from 'mongo-in-memory'
 import { spawn } from 'child_process'
 import promiseSerial from 'promise-serial'
+import path from 'path'
+import mongoFixture from 'pow-mongodb-fixtures'
 
 const port = 8000
 const databaseName = 'eventos-api'
@@ -16,7 +18,7 @@ mongoServerInstance.start((error, config) => {
   } else {
     console.log(`MongoInMemory started: ${mongoServerInstance.getMongouri(databaseName)}`)
     promiseSerial([
-      // addFixtures.bind(null, config),
+      addFixtures.bind(null, config),
       startApi,
       startTestIntegration,
       killDatabase,
@@ -26,6 +28,22 @@ mongoServerInstance.start((error, config) => {
     })
   }
 })
+
+const addFixtures = (config) => {
+  return new Promise(resolve => {
+    const fixtures = mongoFixture.connect(databaseName, {
+      host: config.host,
+      port: config.port
+    })
+    const pathFixture = path.join(__dirname, '/fixtures')
+    console.log('Iniciando importação', pathFixture)
+
+    fixtures.load(pathFixture, () => {
+      console.log('Dados importados')
+      resolve()
+    })
+  })
+}
 
 const startApi = () => {
   return new Promise((resolve) => {

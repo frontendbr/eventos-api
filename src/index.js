@@ -11,7 +11,9 @@ import errorHandler from './middleware/error-handler-middleware'
 const app = express()
 app.server = http.createServer(app)
 
-app.use(morgan('dev'))
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'))
+}
 
 initializeDb(db => {
   app.use(middleware({
