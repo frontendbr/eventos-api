@@ -24,8 +24,8 @@ describe('Signout', () => {
         app,
         db
       }))
+
       useApp.should.have.been.called
-      db.should.have.been.called
     })
 
     after(function () {
@@ -74,7 +74,7 @@ describe('Signout', () => {
       const db = {
         signOut: () => { }
       }
-      const dbSignout = sinon.stub(db, 'signOut')
+      sinon.stub(db, 'signOut')
         .returns(new Promise((resolve, reject) => {
           reject(new Error({
             error: 'error'
@@ -88,8 +88,6 @@ describe('Signout', () => {
 
       // simulando a chamada do middleware
       middleware()
-
-      dbSignout.should.have.been.called
     })
   })
 })
