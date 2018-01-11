@@ -63,6 +63,7 @@
     "eslint-plugin-import": "^2.8.0",
     "firebase-mock": "^1.1.5",
     "mocha": "^2.4.5",
+    "mongo-in-memory": "0.0.5",
     "nodemon": "^1.12.1",
     "npm-run-all": "^4.1.1",
     "nyc": "^11.4.1",
