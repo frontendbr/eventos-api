@@ -14,7 +14,7 @@ export default () => {
     MONGO_PORT = config.mongo.port,
     MONGO_DATABASE = config.mongo.database
   }) => {
-    const AUTH = `${MONGO_USERNAME}:${MONGO_PASSWORD}@`
+    const AUTH = MONGO_USERNAME ? `${MONGO_USERNAME}:${MONGO_PASSWORD}@` : ''
 
     return `mongodb://${AUTH}${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`
   }

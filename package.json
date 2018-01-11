@@ -6,13 +6,17 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production ./node_modules/.bin/babel-node src",
     "dev": "cross-env NODE_ENV=dev nodemon ./node_modules/.bin/babel-node src",
-    "test": "cross-env NODE_ENV=test mocha test/**/*.spec.js --require babel-register",
+    "test": "cross-env NODE_ENV=test npm-run-all test:unit test:integration",
+    "test:unit": "cross-env NODE_ENV=test mocha test/**/*.unit.spec.js --require babel-register",
+    "test:integration": "cross-env NODE_ENV=test ./node_modules/.bin/babel-node test/integration.test.js",
+    "test:integration:up": "cross-env NODE_ENV=test ./node_modules/.bin/babel-node src",
+    "test:integration:run": "cross-env NODE_ENV=test mocha test/**/*integration.spec.js --require babel-register",
     "watch": "npm-run-all --parallel watch:*",
     "watch:test": "npm test -- --watch",
     "watch:lint": "onchange '**/*.js' -- npm run eslint",
     "coverage": "cross-env NODE_ENV=test npm-run-all coverage:** ",
     "coverage:cover": "cross-env NODE_ENV=test nyc npm test",
-    "coverage:coveralls": "npm run coverage:cover && nyc report --reporter=text-lcov | coveralls",
+    "coverage:coveralls": "cross-env NODE_ENV=test npm run coverage:cover && nyc report --reporter=text-lcov | coveralls",
     "coverage:clean": "rm -rf ./coverage",
     "eslint": "eslint --cache --ext .js src test",
     "eslint:fix": "eslint --cache --fix  --ext .js src test"
@@ -62,9 +66,11 @@
     "nodemon": "^1.12.1",
     "npm-run-all": "^4.1.1",
     "nyc": "^11.4.1",
+    "promise-serial": "^0.1.5",
     "proxyquire": "^1.8.0",
     "sinon": "^2.3.8",
     "sinon-chai": "^2.12.0",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
   }
 }

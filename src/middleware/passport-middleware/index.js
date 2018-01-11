@@ -6,7 +6,7 @@ const {
 } = require('passport-github2')
 const passport = require('passport')
 const firebase = require('firebase')
-const adminFirebase = require('../../admin-firebase')
+// const adminFirebase = require('../../admin-firebase')
 
 module.exports = ({
   config,
@@ -14,9 +14,9 @@ module.exports = ({
 }) => {
   console.info('Init Middleware Passport module')
   const routes = Router()
-  adminFirebase({
-    config
-  })
+  // adminFirebase({
+  //   config
+  // })
 
   const GITHUB_CLIENT_ID = config.github.clienteId
   const GITHUB_CLIENT_SECRET = config.github.clienteSecret
