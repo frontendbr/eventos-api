@@ -1,4 +1,10 @@
 {
   "port": "9000",
-  "serviceAccountAdminPath": "./firebase-admin-sdk-test.json"
+  "mongo": {
+    "host": "localhost",
+    "port": 8000,
+    "database": "eventos-api",
+    "username": "",
+    "password": ""
+  }
 }

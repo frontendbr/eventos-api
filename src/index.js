@@ -5,14 +5,14 @@ import middleware from './middleware'
 import initializeDb from './database'
 import api from './api'
 import config from 'config'
-import views from './views'
-import signout from './middleware/signout-middleware'
 import errorHandler from './middleware/error-handler-middleware'
 
 const app = express()
 app.server = http.createServer(app)
 
-app.use(morgan('dev'))
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'))
+}
 
 initializeDb(db => {
   app.use(middleware({
@@ -21,21 +21,10 @@ initializeDb(db => {
     app
   }))
 
-  views({
-    config,
-    db,
-    app
-  })
-
   app.use('/api', api({
     config,
     db
   }))
-
-  signout({
-    app,
-    db
-  })
 
   errorHandler({
     app,

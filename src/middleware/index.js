@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import defaultMiddleware from './default-middleware-application'
-import passportMiddleware from './passport-middleware'
 
 module.exports = ({
   config,
@@ -15,11 +14,6 @@ module.exports = ({
     config,
     app
   })
-
-  routes.use(passportMiddleware({
-    config,
-    db
-  }))
 
   return routes
 }
