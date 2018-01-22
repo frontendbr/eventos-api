@@ -1,13 +1,13 @@
-import express from 'express'
+import { Router } from 'express'
 import { find, create, update, remove } from './controller'
 
 const router = (loginManager) => {
-  let route = express.Router()
+  let route = Router()
 
-  route.get('/event/:id?', find)
-  route.post('/event', loginManager.authentication, create)
-  route.put('/event/:id', loginManager.admin, update)
-  route.delete('/event/:id', loginManager.admin, remove)
+  route.get('/:id?', find)
+  route.post('/', loginManager.authentication, create)
+  route.put('/:id', loginManager.admin, update)
+  route.delete('/:id', loginManager.admin, remove)
 
   return route
 }

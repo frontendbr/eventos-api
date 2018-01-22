@@ -1,31 +1,14 @@
 import { Router } from 'express'
 
-module.exports = ({
-  config,
-  db,
-  loginManager
-}) => {
+import { create } from './controller'
+
+const router = (loginManager) => {
   console.info('Init Admin module')
   const route = Router()
 
-  route.post('/admin',
-    loginManager.admin,
-    (req, res, next) => {
-      const admin = req.body
-      db.addAdmin(admin)
-        .then(() => {
-          res.json({})
-          next()
-        }).catch((error) => {
-          console.log(error)
-          res
-            .status(500)
-            .json({
-              error: 'Admin no registered, please try again'
-            })
-          next()
-        })
-    })
+  route.post('/', loginManager.authentication, create)
 
   return route
 }
+
+export default router
