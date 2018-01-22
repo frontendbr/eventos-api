@@ -4,6 +4,7 @@ import loginMiddleware from '../middleware/login-request-middleware'
 import Docs from './docs'
 import Events from './events'
 import Admin from './admin'
+import Auth from './auth'
 
 const router = ({
   config,
@@ -17,6 +18,7 @@ const router = ({
 
   const api = Router()
 
+  api.use('/auth', Auth(loginManager))
   api.use('/admin', Admin(loginManager))
   api.use('/event', Events(loginManager))
 

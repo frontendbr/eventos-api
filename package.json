@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/frontendbr/eventos-api#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.17.2",
     "bodymen": "^1.0.3",
@@ -43,10 +44,11 @@
     "express-validation": "^0.4.5",
     "firebase": "^4.1.3",
     "firebase-admin": "^5.0.1",
+    "joi": "^7.3.0",
+    "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "mongoose": "^4.13.9",
     "morgan": "^1.8.0",
-    "joi": "^7.3.0",
     "swagger-ui-express": "^2.0.1"
   },
   "devDependencies": {

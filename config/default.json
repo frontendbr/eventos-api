@@ -1,10 +1,12 @@
 {
   "port": "80",
   "secret": "secret",
+  "expiresIn": "8h",
   "github": {
-    "clienteId": "93c87ec9bfbea4151180",
-    "clienteSecret": "8e1d50fb000071ebd47a7c970fce9365c831f287",
-    "callbackURL": "https://frontendbreventosapi-eventosapi.wedeploy.io/auth/github/callback"
+    "client_id": "7ce460021a69ec7f56b7",
+    "client_secret": "d58c251c95c9ce057c9532aacb0fb2f33e0412f8",
+    "redirect_uri": "http://localhost:3000/auth/callback",
+    "grant_type": "grant_type"
   },
   "serviceAccountAdminPath": "./firebase-admin-sdk.json",
   "databaseURL": "https://frontend-br-eventos.firebaseio.com",
