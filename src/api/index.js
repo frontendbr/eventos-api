@@ -25,14 +25,6 @@ const router = ({
     db
   }))
 
-  api.use(Admin({
-    config,
-    db,
-    loginManager
-  }))
-
-  api.use(Events(loginManager))
-
   api.get('/', (req, res, next) => {
     res.json({
       version
