@@ -4,7 +4,6 @@ import loginMiddleware from '../middleware/login-request-middleware'
 import Docs from './docs'
 import Events from './events'
 import Admin from './admin'
-import Menu from './menu'
 
 module.exports = ({
   config,
@@ -24,11 +23,6 @@ module.exports = ({
   }))
   api.use(Events(loginManager))
   api.use(Admin({
-    config,
-    db,
-    loginManager
-  }))
-  api.use(Menu({
     config,
     db,
     loginManager

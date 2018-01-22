@@ -5,7 +5,6 @@ import middleware from './middleware'
 import initializeDb from './database'
 import api from './api'
 import config from 'config'
-import signout from './middleware/signout-middleware'
 import errorHandler from './middleware/error-handler-middleware'
 
 const app = express()
@@ -26,11 +25,6 @@ initializeDb(db => {
     config,
     db
   }))
-
-  signout({
-    app,
-    db
-  })
 
   errorHandler({
     app,
