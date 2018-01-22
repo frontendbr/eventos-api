@@ -25,7 +25,10 @@ const generateJWT = ({ email }) => {
   return { token: jwt.sign({ email }, config.secret, { expiresIn: config.expiresIn }) }
 }
 
-const getUserInfo = ({ data }) => axios
-  .get(`https://api.github.com/user?access_token=${data.access_token}`, params)
-  .then((resp) => resp.data)
-  .then(generateJWT)
+const getUserInfo = ({ data }) => {
+  console.log(data)
+  return axios
+    .get(`https://api.github.com/user?access_token=${data.access_token}`, params)
+    .then((resp) => resp.data)
+    .then(generateJWT)
+}

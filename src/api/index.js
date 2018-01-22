@@ -18,7 +18,7 @@ const router = ({
 
   const api = Router()
 
-  api.use('/auth', Auth(loginManager))
+  api.use('/auth', Auth())
   api.use('/admin', Admin(loginManager))
   api.use('/event', Events(loginManager))
 
