@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from 'config'
 import { success, error } from './../../constants'
-import Authentication from 'Authentication'
+import Authentication from './Authentication'
 
 export const auth = (request, response) => {
   const { code } = request.body

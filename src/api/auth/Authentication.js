@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import config from 'config'
+import Administrator from '../admin/model'
 
 export class Authentication {
   constructor () {
@@ -9,6 +10,20 @@ export class Authentication {
 
   checkAuth (request) {
     return this._validToken(request)
+  }
+
+  checkAdmin (request) {
+    return this._validToken(request)
+      .then((user) => {
+        return Administrator
+          .findOne({ email: user.email })
+          .exec()
+      }).then((adm) => {
+        if (!adm) {
+          return Promise.reject(new Error('É necessário ser adm'))
+        }
+        return adm
+      })
   }
 
   _validToken (request) {
