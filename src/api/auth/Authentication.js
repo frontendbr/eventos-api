@@ -14,9 +14,9 @@ export class Authentication {
 
   checkAdmin (request) {
     return this._validToken(request)
-      .then((user) => {
+      .then(({ email }) => {
         return Administrator
-          .findOne({ email: user.email })
+          .findOne({ email })
           .exec()
       }).then((adm) => {
         if (!adm) {
