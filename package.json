@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production ./node_modules/.bin/babel-node src",
     "dev": "cross-env NODE_ENV=dev nodemon ./node_modules/.bin/babel-node src",
-    "test": "cross-env NODE_ENV=test npm-run-all test:unit test:integration",
+    "test": "cross-env NODE_ENV=test npm-run-all eslint test:unit test:integration",
     "test:unit": "cross-env NODE_ENV=test mocha test/**/*.unit.spec.js --require babel-register",
     "test:integration": "cross-env NODE_ENV=test ./node_modules/.bin/babel-node test/integration.test.js",
     "test:integration:up": "cross-env NODE_ENV=test ./node_modules/.bin/babel-node src",
