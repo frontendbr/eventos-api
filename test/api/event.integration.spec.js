@@ -121,6 +121,34 @@ describe('Events', () => {
         .end(TestUtil.endTest.bind(null, done))
     })
 
+    it('should persist the new event when not have admin token', (done) => {
+      const event = {
+        'title': 'BrazilJS - POA',
+        'link': 'https://braziljs.org/conf/',
+        'price': 1.5,
+        'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
+        '__v': 0,
+        'location': {
+          'city': 'POA',
+          'state': 'RS',
+          'address': 'Barra Shopping Sul'
+        },
+        'date': {
+          'day': 25,
+          'month': 'Agosto',
+          'year': 2017
+        }
+      }
+      const genericToken = Authentication.createToken('generic@testando.com').token
+
+      request.post('/')
+        .send(event)
+        .set('authorization', `Bearer ${genericToken}`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(TestUtil.endTest.bind(null, done))
+    })
+
     it('should return error when not have price', (done) => {
       const event = {
         'title': 'BrazilJS - POA',
@@ -174,6 +202,36 @@ describe('Events', () => {
         .expect(200)
         .end(TestUtil.endTest.bind(null, done))
     })
+
+    it('should return error on generic user update the event', (done) => {
+      const event = {
+        'title': 'BrazilJS - POA',
+        'link': 'https://braziljs.org/conf/',
+        'price': 1.5,
+        'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
+        '__v': 0,
+        'location': {
+          'city': 'POA',
+          'state': 'RS',
+          'address': 'Barra Shopping Sul'
+        },
+        'date': {
+          'day': 25,
+          'month': 'Agosto',
+          'year': 2017
+        }
+      }
+
+      const genericToken = Authentication.createToken('generic@testando.com').token
+
+      request.put('/200000000000000000000001')
+        .send(event)
+        .set('authorization', `Bearer ${genericToken}`)
+        .expect('Content-Type', /json/)
+        .expect(401)
+        .end(TestUtil.endTest.bind(null, done))
+    })
+
     it('should return error on update event not persisted', (done) => {
       const event = {}
 
