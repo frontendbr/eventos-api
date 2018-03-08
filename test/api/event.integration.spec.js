@@ -1,6 +1,12 @@
 import TestUtil from '../TestUtil'
+import Authentication from '../../src/api/auth/Authentication'
 
 describe('Events', () => {
+  let token
+  before(() => {
+    token = Authentication.createToken('teste@testando.com').token
+  })
+
   const request = TestUtil.requestApi('event')
 
   context('Get /', () => {
@@ -109,6 +115,35 @@ describe('Events', () => {
 
       request.post('/')
         .send(event)
+        .set('authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(TestUtil.endTest.bind(null, done))
+    })
+
+    it('should persist the new event when not have admin token', (done) => {
+      const event = {
+        'title': 'BrazilJS - POA',
+        'link': 'https://braziljs.org/conf/',
+        'price': 1.5,
+        'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
+        '__v': 0,
+        'location': {
+          'city': 'POA',
+          'state': 'RS',
+          'address': 'Barra Shopping Sul'
+        },
+        'date': {
+          'day': 25,
+          'month': 'Agosto',
+          'year': 2017
+        }
+      }
+      const genericToken = Authentication.createToken('generic@testando.com').token
+
+      request.post('/')
+        .send(event)
+        .set('authorization', `Bearer ${genericToken}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end(TestUtil.endTest.bind(null, done))
@@ -133,6 +168,7 @@ describe('Events', () => {
 
       request.post('/')
         .send(event)
+        .set('authorization', `Bearer ${token}`)
         .expect('Content-Type', /json/)
         .expect(500)
         .end(TestUtil.endTest.bind(null, done))
@@ -161,14 +197,47 @@ describe('Events', () => {
 
       request.put('/200000000000000000000001')
         .send(event)
+        .set('authorization', `Bearer ${token}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end(TestUtil.endTest.bind(null, done))
     })
+
+    it('should return error on generic user update the event', (done) => {
+      const event = {
+        'title': 'BrazilJS - POA',
+        'link': 'https://braziljs.org/conf/',
+        'price': 1.5,
+        'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
+        '__v': 0,
+        'location': {
+          'city': 'POA',
+          'state': 'RS',
+          'address': 'Barra Shopping Sul'
+        },
+        'date': {
+          'day': 25,
+          'month': 'Agosto',
+          'year': 2017
+        }
+      }
+
+      const genericToken = Authentication.createToken('generic@testando.com').token
+
+      request.put('/200000000000000000000001')
+        .send(event)
+        .set('authorization', `Bearer ${genericToken}`)
+        .expect('Content-Type', /json/)
+        .expect(401)
+        .end(TestUtil.endTest.bind(null, done))
+    })
+
     it('should return error on update event not persisted', (done) => {
       const event = {}
 
-      request.put('/200000000000000000000003')
+      request
+        .put('/200000000000000000000003')
+        .set('authorization', `Bearer ${token}`)
         .send(event)
         .expect('Content-Type', /json/)
         .expect(404)
@@ -178,7 +247,9 @@ describe('Events', () => {
     it('should return error on update event with invalid id', (done) => {
       const event = {}
 
-      request.put('/1234')
+      request
+        .put('/1234')
+        .set('authorization', `Bearer ${token}`)
         .send(event)
         .expect('Content-Type', /json/)
         .expect(500)
@@ -188,14 +259,18 @@ describe('Events', () => {
 
   context('Delete /:id', () => {
     it('should delete the event', (done) => {
-      request.del('/200000000000000000000001')
+      request
+        .del('/200000000000000000000001')
+        .set('authorization', `Bearer ${token}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end(TestUtil.endTest.bind(null, done))
     })
 
     it('should return error on delete event with id invalid', (done) => {
-      request.del('/1234')
+      request
+        .del('/1234')
+        .set('authorization', `Bearer ${token}`)
         .expect('Content-Type', /json/)
         .expect(500)
         .end(TestUtil.endTest.bind(null, done))
