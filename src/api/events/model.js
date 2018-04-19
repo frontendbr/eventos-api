@@ -32,14 +32,17 @@ const Event = new Schema({
       type: String,
       required: true
     },
-    mapUrl: {
+    locationUrl: {
       type: String
     }
+  },
+  status: {
+    type: String
   },
   link: {
     type: String
   },
-  description: {
+  shortDescription: {
     type: String
   },
   image: {
