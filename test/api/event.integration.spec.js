@@ -17,8 +17,8 @@ describe('Events', () => {
           {
             '_id': '200000000000000000000001',
             'title': 'BrazilJS - Fortaleza',
-            "shortDescription": "Descrição marota",
-            "status": "pending",
+            'shortDescription': 'Descrição marota',
+            'status': 'pending',
             'link': 'https://braziljs.org/conf/',
             'price': 1.5,
             'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
@@ -27,7 +27,7 @@ describe('Events', () => {
               'city': 'Fortaleza',
               'state': 'CE',
               'address': 'Faculdade Sete de Setembro',
-              "locationUrl": "https://www.google.com.br/maps"
+              'locationUrl': 'https://www.google.com.br/maps'
             },
             'date': {
               'day': 1,
@@ -53,8 +53,8 @@ describe('Events', () => {
         {
           '_id': '200000000000000000000001',
           'title': 'BrazilJS - Fortaleza',
-          "shortDescription": "Descrição marota",
-          "status": "pending",
+          'shortDescription': 'Descrição marota',
+          'status': 'pending',
           'link': 'https://braziljs.org/conf/',
           'price': 1.5,
           'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
@@ -63,7 +63,7 @@ describe('Events', () => {
             'city': 'Fortaleza',
             'state': 'CE',
             'address': 'Faculdade Sete de Setembro',
-            "locationUrl": "https://www.google.com.br/maps"
+            'locationUrl': 'https://www.google.com.br/maps'
           },
           'date': {
             'day': 1,
@@ -103,8 +103,8 @@ describe('Events', () => {
     it('should persist the new event', (done) => {
       const event = {
         'title': 'BrazilJS - Fortaleza',
-        "shortDescription": "Descrição marota",
-        "status": "pending",
+        'shortDescription': 'Descrição marota',
+        'status': 'pending',
         'link': 'https://braziljs.org/conf/',
         'price': 1.5,
         'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
@@ -113,7 +113,7 @@ describe('Events', () => {
           'city': 'Fortaleza',
           'state': 'CE',
           'address': 'Faculdade Sete de Setembro',
-          "locationUrl": "https://www.google.com.br/maps"
+          'locationUrl': 'https://www.google.com.br/maps'
         },
         'date': {
           'day': 1,
@@ -133,8 +133,8 @@ describe('Events', () => {
     it('should persist the new event when not have admin token', (done) => {
       const event = {
         'title': 'BrazilJS - Fortaleza',
-        "shortDescription": "Descrição marota",
-        "status": "pending",
+        'shortDescription': 'Descrição marota',
+        'status': 'pending',
         'link': 'https://braziljs.org/conf/',
         'price': 1.5,
         'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
@@ -143,7 +143,7 @@ describe('Events', () => {
           'city': 'Fortaleza',
           'state': 'CE',
           'address': 'Faculdade Sete de Setembro',
-          "locationUrl": "https://www.google.com.br/maps"
+          'locationUrl': 'https://www.google.com.br/maps'
         },
         'date': {
           'day': 1,
@@ -165,8 +165,8 @@ describe('Events', () => {
     it('should return error when not have price', (done) => {
       const event = {
         'title': 'BrazilJS - Fortaleza',
-        "shortDescription": "Descrição marota",
-        "status": "pending",
+        'shortDescription': 'Descrição marota',
+        'status': 'pending',
         'link': 'https://braziljs.org/conf/',
         'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
         '__v': 0,
@@ -174,7 +174,7 @@ describe('Events', () => {
           'city': 'Fortaleza',
           'state': 'CE',
           'address': 'Faculdade Sete de Setembro',
-          "locationUrl": "https://www.google.com.br/maps"
+          'locationUrl': 'https://www.google.com.br/maps'
         },
         'date': {
           'day': 1,
@@ -196,8 +196,8 @@ describe('Events', () => {
     it('should update the event', (done) => {
       const event = {
         'title': 'BrazilJS - Fortaleza',
-        "shortDescription": "Descrição marota",
-        "status": "pending",
+        'shortDescription': 'Descrição marota',
+        'status': 'pending',
         'link': 'https://braziljs.org/conf/',
         'price': 1.5,
         'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
@@ -206,7 +206,7 @@ describe('Events', () => {
           'city': 'Fortaleza',
           'state': 'CE',
           'address': 'Faculdade Sete de Setembro',
-          "locationUrl": "https://www.google.com.br/maps"
+          'locationUrl': 'https://www.google.com.br/maps'
         },
         'date': {
           'day': 1,
@@ -226,8 +226,8 @@ describe('Events', () => {
     it('should return error on generic user update the event', (done) => {
       const event = {
         'title': 'BrazilJS - Fortaleza',
-        "shortDescription": "Descrição marota",
-        "status": "pending",
+        'shortDescription': 'Descrição marota',
+        'status': 'pending',
         'link': 'https://braziljs.org/conf/',
         'price': 1.5,
         'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
@@ -236,7 +236,7 @@ describe('Events', () => {
           'city': 'Fortaleza',
           'state': 'CE',
           'address': 'Faculdade Sete de Setembro',
-          "locationUrl": "https://www.google.com.br/maps"
+          'locationUrl': 'https://www.google.com.br/maps'
         },
         'date': {
           'day': 1,
