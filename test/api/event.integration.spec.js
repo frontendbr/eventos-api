@@ -190,6 +190,58 @@ describe('Events', () => {
         .expect(500)
         .end(TestUtil.endTest.bind(null, done))
     })
+
+    it('should return error when not have title', (done) => {
+      const event = {
+        'shortDescription': 'Descrição marota',
+        'status': 'pending',
+        'link': 'https://braziljs.org/conf/',
+        'price': 1.5,
+        'image': 'https://braziljs.org/wp-content/themes/braziljs/assets/img/logos/braziljs-00508dcfc4.svg',
+        '__v': 0,
+        'location': {
+          'city': 'Fortaleza',
+          'state': 'CE',
+          'address': 'Faculdade Sete de Setembro',
+          'locationUrl': 'https://www.google.com.br/maps'
+        },
+        'date': {
+          'day': 1,
+          'month': 'Setembro',
+          'year': 2017
+        }
+      }
+
+      const erroBody = {
+        'status': false,
+        'data': {
+          'errors': {
+            'title': {
+              'message': 'Path `title` is required.',
+              'name': 'ValidatorError',
+              'properties': {
+                'type': 'required',
+                'message': 'Path `{PATH}` is required.',
+                'path': 'title'
+              },
+              'kind': 'required',
+              'path': 'title',
+              '$isValidatorError': true
+            }
+          },
+          '_message': 'Event validation failed',
+          'message': 'Event validation failed: title: Path `title` is required.',
+          'name': 'ValidationError'
+        }
+      }
+
+      request.post('/')
+        .send(event)
+        .set('authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(500, erroBody)
+        .end(TestUtil.endTest.bind(null, done))
+    })
   })
 
   context('Put /:id', () => {
