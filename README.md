@@ -2,7 +2,7 @@
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 Master: [![Build Status](https://travis-ci.org/frontendbr/eventos-api.svg?branch=master)](https://travis-ci.org/frontendbr/eventos-api)
-[![Coverage Status](https://coveralls.io/repos/github/frontendbr/eventos-api/badge.svg?branch=master)](https://coveralls.io/github/frontendbr/eventos-api?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/frontendbr/eventos-api/badge.svg?branch=master)](https://coveralls.io/github/frontendbr/eventos-api?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/frontendbr/eventos-api.svg)](https://greenkeeper.io/)
 
 Esse projeto tem como intuito criar uma API capaz de fornecer os dados para os eventos do [frontendbr](frontendbr.com.br/eventos).
 
