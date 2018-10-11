@@ -58,7 +58,7 @@ const create = (req, res) => {
 }
 
 const update = (req, res) => {
-  Event.findOneAndUpdate({_id: req.params.id}, req.body)
+  Event.findOneAndUpdate({ _id: req.params.id }, req.body)
     .then((event) => {
       if (!event) {
         return res.status(404).json({
