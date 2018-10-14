@@ -42,7 +42,7 @@
     "express-authentication": "^0.3.2",
     "express-session": "^1.15.3",
     "express-validation": "^1.0.2",
-    "joi": "^13.7.0",
+    "joi": "^14.0.0",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.3.2",
