@@ -26,6 +26,11 @@ Você pode, se desejar, configurar uma aplicação do github através do arquivo
 
 Para rodar, basta executar `npm i` na raiz, em seguida `npm start`.
 
+### Configuração do ambiente com Firebase e Admin
+Link de comandos e configuração atualizados: https://firebase.google.com/docs/functions/config-env?hl=pt-BR
+
+
+
 ## Dev
 Para contribuir com o projeto é muito simples!
 
