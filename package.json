@@ -52,7 +52,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-istanbul": "^0.12.2",
-    "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-istanbul": "^6.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
