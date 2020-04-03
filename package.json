@@ -68,7 +68,7 @@
     "mongo-in-memory": "0.0.5",
     "nodemon": "^1.18.4",
     "npm-run-all": "^4.1.1",
-    "nyc": "^13.1.0",
+    "nyc": "^15.0.1",
     "pow-mongodb-fixtures": "^0.14.0",
     "promise-serial": "^0.1.5",
     "sinon": "^7.2.4",
